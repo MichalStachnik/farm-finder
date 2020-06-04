@@ -1,1 +1,0 @@
-{"name":"farm-finder","version":"1.0.0","description":"","main":"index.js","scripts":{"dev":"next","build":"next build","start":"next start"},"keywords":[],"author":"","license":"ISC","dependencies":{"next":"^9.4.4","react":"^16.13.1","react-dom":"^16.13.1","react-leaflet":"^2.7.0","react-map-gl":"^5.2.5"},"readme":"ERROR: No README data found!","_id":"farm-finder@1.0.0"}
