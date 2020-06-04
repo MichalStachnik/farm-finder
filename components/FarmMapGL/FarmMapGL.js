@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 import styles from './FarmMapGL.module.css';
 
@@ -9,24 +9,29 @@ export default function FarmMapGL({ features }) {
   const [viewport, setViewport] = useState({
     latitude: 41,
     longitude: -74,
-    width: '90vw',
-    height: '90vh',
+    width: '100%',
+    height: '100%',
     zoom: 8,
   });
 
+  const [selectedFarm, setSelectedFarm] = useState(null);
+
+  const handleViewportChange = (viewport) => {
+    console.log('changing viewport');
+    setViewport(viewport);
+  };
+
   return (
-    <div>
-      {features.length
+    <div className={styles.farmMapContainer}>
+      {/* {features.length
         ? features.map((feature) => {
             return <div key={feature.id}>{feature.center}</div>;
           })
-        : null}
+        : null} */}
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={process.env.KEY}
-        onViewportChange={(viewport) => {
-          setViewport(viewport);
-        }}
+        onViewportChange={handleViewportChange}
       >
         {features.length
           ? features.map((feature) => {
@@ -36,7 +41,7 @@ export default function FarmMapGL({ features }) {
                   longitude={feature.center[0]}
                   latitude={feature.center[1]}
                 >
-                  <div className={styles.markerContainer}>
+                  <div onClick={(e) => setSelectedFarm(feature)}>
                     <img
                       className={styles.markerContainerImg}
                       src="/seedling-solid.svg"
@@ -47,6 +52,16 @@ export default function FarmMapGL({ features }) {
               );
             })
           : null}
+
+        {selectedFarm ? (
+          <Popup
+            longitude={selectedFarm.center[0]}
+            latitude={selectedFarm.center[1]}
+            onClose={() => setSelectedFarm(null)}
+          >
+            <div>farm:</div>
+          </Popup>
+        ) : null}
       </ReactMapGL>
     </div>
   );

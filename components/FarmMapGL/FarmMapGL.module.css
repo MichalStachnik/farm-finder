@@ -1,4 +1,11 @@
+.farmMapContainer {
+  margin: 0 auto;
+  width: 98vw;
+  height: 90vh;
+}
+
 .markerContainerImg {
+  cursor: pointer;
   width: 20px;
   height: 20px;
   fill: #adff2f;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
 const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
@@ -31,6 +31,10 @@ function HomePage() {
     console.log(searchValue);
   };
 
+  useEffect(() => {
+    console.log('in use effect');
+  }, [features]);
+
   return (
     <div>
       <h1>Welcome to Farm Finder</h1>
@@ -43,7 +47,9 @@ function HomePage() {
         <button>Search</button>
       </form>
       {features.length
-        ? features.map((feature) => <div>{feature.place_name}</div>)
+        ? features.map((feature) => (
+            <div key={feature.id}>{feature.place_name}</div>
+          ))
         : null}
       <button onClick={logState}>log state</button>
       {/* {features.length ? <FarmMapGL features={features}></FarmMapGL> : null} */}
