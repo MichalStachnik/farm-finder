@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 
-const FarmMap = dynamic(() => import('../components/FarmMap'), { ssr: false });
+const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
+  ssr: false,
+});
 
 function HomePage() {
   const [searchValue, setSearchValue] = useState('');
@@ -41,7 +43,8 @@ function HomePage() {
         <button>Search</button>
       </form>
       <button onClick={logState}>log state</button>
-      {features.length ? <FarmMap features={features}></FarmMap> : null}
+      {/* {features.length ? <FarmMapGL features={features}></FarmMapGL> : null} */}
+      <FarmMapGL features={features}></FarmMapGL>
     </div>
   );
 }
