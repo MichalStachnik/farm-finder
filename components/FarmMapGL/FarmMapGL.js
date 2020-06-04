@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 
+import styles from './FarmMapGL.module.css';
+
 export default function FarmMapGL({ features }) {
   console.log('the features', features);
 
   const [viewport, setViewport] = useState({
     latitude: 41,
-    longitude: -73,
+    longitude: -74,
     width: '90vw',
     height: '90vh',
-    zoom: 10,
+    zoom: 8,
   });
 
   return (
@@ -34,7 +36,13 @@ export default function FarmMapGL({ features }) {
                   longitude={feature.center[0]}
                   latitude={feature.center[1]}
                 >
-                  <div> im a marker</div>
+                  <div className={styles.markerContainer}>
+                    <img
+                      className={styles.markerContainerImg}
+                      src="/seedling-solid.svg"
+                      alt="seedling"
+                    />
+                  </div>
                 </Marker>
               );
             })

@@ -42,6 +42,9 @@ function HomePage() {
         />
         <button>Search</button>
       </form>
+      {features.length
+        ? features.map((feature) => <div>{feature.place_name}</div>)
+        : null}
       <button onClick={logState}>log state</button>
       {/* {features.length ? <FarmMapGL features={features}></FarmMapGL> : null} */}
       <FarmMapGL features={features}></FarmMapGL>

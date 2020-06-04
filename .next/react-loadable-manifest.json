@@ -7,6 +7,12 @@
       "publicPath": "static/chunks/1.js"
     },
     {
+      "id": "./components/FarmMapGL/FarmMapGL.module.css",
+      "name": "./components/FarmMapGL/FarmMapGL.module.css",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
       "id": "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js",
       "name": "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js",
       "file": "static/chunks/1.js",
@@ -177,6 +183,18 @@
     {
       "id": "./node_modules/@math.gl/web-mercator/dist/esm/web-mercator-viewport.js",
       "name": "./node_modules/@math.gl/web-mercator/dist/esm/web-mercator-viewport.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./components/FarmMapGL/FarmMapGL.module.css",
+      "name": "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./components/FarmMapGL/FarmMapGL.module.css",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/css-loader/dist/runtime/api.js",
+      "name": "./node_modules/css-loader/dist/runtime/api.js",
       "file": "static/chunks/1.js",
       "publicPath": "static/chunks/1.js"
     },
@@ -579,6 +597,12 @@
     {
       "id": "./node_modules/react-virtualized-auto-sizer/dist/index.esm.js",
       "name": "./node_modules/react-virtualized-auto-sizer/dist/index.esm.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js",
+      "name": "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js",
       "file": "static/chunks/1.js",
       "publicPath": "static/chunks/1.js"
     },
