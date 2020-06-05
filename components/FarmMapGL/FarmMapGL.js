@@ -30,7 +30,7 @@ export default function FarmMapGL({ features }) {
         : null} */}
       <ReactMapGL
         {...viewport}
-        mapboxApiAccessToken={process.env.KEY}
+        mapboxApiAccessToken={process.env.MAPBOX_KEY}
         onViewportChange={handleViewportChange}
       >
         {features.length
