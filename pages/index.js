@@ -31,7 +31,7 @@ function HomePage() {
   };
 
   const logState = () => {
-    console.log('log state lets go vercel');
+    console.log('log state wtf');
     console.log(features);
     console.log(searchValue);
   };
