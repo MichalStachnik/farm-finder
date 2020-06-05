@@ -5,6 +5,8 @@ const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
   ssr: false,
 });
 
+import Suggestions from '../components/Suggestions/Suggestions';
+
 function HomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [features, setFeatures] = useState([]);
@@ -26,7 +28,7 @@ function HomePage() {
   };
 
   const logState = () => {
-    console.log('log state');
+    console.log('log state test');
     console.log(features);
     console.log(searchValue);
   };
@@ -46,11 +48,15 @@ function HomePage() {
         />
         <button>Search</button>
       </form>
-      {features.length
-        ? features.map((feature) => (
-            <div key={feature.id}>{feature.place_name}</div>
-          ))
-        : null}
+      {features.length ? <Suggestions features={features} /> : null}
+      {/* <div> */}
+      {/* {features.length
+          ? features.map((feature) => (
+              <Suggestion key={feature.id} feature={feature} />
+            ))
+          : null} */}
+      {/* </div> */}
+
       <button onClick={logState}>log state</button>
       {/* {features.length ? <FarmMapGL features={features}></FarmMapGL> : null} */}
       <FarmMapGL features={features}></FarmMapGL>
