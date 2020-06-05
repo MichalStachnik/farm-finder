@@ -16,7 +16,7 @@ function HomePage() {
 
     try {
       const res = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchValue}.json?access_token=${process.env.KEY}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchValue}.json?access_token=${process.env.MAPBOX_KEY}`
       );
       const json = await res.json();
       console.log('json: ', json);
@@ -28,7 +28,7 @@ function HomePage() {
   };
 
   const logState = () => {
-    console.log('log state test');
+    console.log('log state lets go vercel');
     console.log(features);
     console.log(searchValue);
   };
