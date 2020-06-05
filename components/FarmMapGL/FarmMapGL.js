@@ -8,7 +8,7 @@ export default function FarmMapGL({ features }) {
 
   console.log('OUR KEY:');
   console.log(process.env.MAPBOX_KEY);
-  console.log('^^^');
+  console.log('^^^ wtf..');
 
   const [viewport, setViewport] = useState({
     latitude: 41,

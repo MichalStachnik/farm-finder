@@ -13,6 +13,8 @@ function HomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [features, setFeatures] = useState([]);
 
+  console.log('TEST', process.env.TEST);
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
