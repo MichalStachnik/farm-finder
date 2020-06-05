@@ -31,7 +31,7 @@ function HomePage() {
   };
 
   const logState = () => {
-    console.log('log state wtf');
+    console.log('log state 123');
     console.log(features);
     console.log(searchValue);
   };
