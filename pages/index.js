@@ -28,7 +28,7 @@ function HomePage() {
   };
 
   const logState = () => {
-    console.log('log state');
+    console.log('log state test');
     console.log(features);
     console.log(searchValue);
   };
