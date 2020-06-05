@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
+import ReactMapGL from 'react-map-gl';
+
 const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
   ssr: false,
 });
@@ -20,6 +22,7 @@ function HomePage() {
       );
       const json = await res.json();
       console.log('json: ', json);
+      console.log('mapbox key', process.env.MAPBOX_KEY);
       setFeatures(json.features);
     } catch (error) {
       console.log('error sending request');
