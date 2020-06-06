@@ -6,10 +6,6 @@ import styles from './FarmMapGL.module.css';
 export default function FarmMapGL({ features }) {
   console.log('the features', features);
 
-  console.log('OUR KEY:');
-  console.log(process.env.MAPBOX_KEY);
-  console.log('^^^ wtf..');
-
   const [viewport, setViewport] = useState({
     latitude: 41,
     longitude: -74,
@@ -21,7 +17,6 @@ export default function FarmMapGL({ features }) {
   const [selectedFarm, setSelectedFarm] = useState(null);
 
   const handleViewportChange = (viewport) => {
-    console.log('changing viewport');
     setViewport(viewport);
   };
 

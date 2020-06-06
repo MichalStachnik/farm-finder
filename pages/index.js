@@ -24,23 +24,12 @@ function HomePage() {
       );
       const json = await res.json();
       console.log('json: ', json);
-      console.log('mapbox key', process.env.MAPBOX_KEY);
       setFeatures(json.features);
     } catch (error) {
       console.log('error sending request');
       console.error(error);
     }
   };
-
-  const logState = () => {
-    console.log('log state 123');
-    console.log(features);
-    console.log(searchValue);
-  };
-
-  useEffect(() => {
-    console.log('in use effect');
-  }, [features]);
 
   return (
     <div>
@@ -54,15 +43,6 @@ function HomePage() {
         <button>Search</button>
       </form>
       {features.length ? <Suggestions features={features} /> : null}
-      {/* <div> */}
-      {/* {features.length
-          ? features.map((feature) => (
-              <Suggestion key={feature.id} feature={feature} />
-            ))
-          : null} */}
-      {/* </div> */}
-
-      <button onClick={logState}>log state</button>
       {/* {features.length ? <FarmMapGL features={features}></FarmMapGL> : null} */}
       <FarmMapGL features={features}></FarmMapGL>
     </div>
