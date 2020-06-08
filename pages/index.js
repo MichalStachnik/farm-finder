@@ -13,8 +13,6 @@ function HomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [features, setFeatures] = useState([]);
 
-  console.log('TEST', process.env.TEST);
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,16 +31,19 @@ function HomePage() {
 
   return (
     <div>
-      <h1>Welcome to Farm Finder</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <button>Search</button>
-      </form>
-      {features.length ? <Suggestions features={features} /> : null}
+      <div className="search-container">
+        <h1>Welcome to Farm Finder</h1>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            placeholder="Search..."
+          />
+          <button>Search</button>
+        </form>
+        {features.length ? <Suggestions features={features} /> : null}
+      </div>
       {/* {features.length ? <FarmMapGL features={features}></FarmMapGL> : null} */}
       <FarmMapGL features={features}></FarmMapGL>
     </div>
