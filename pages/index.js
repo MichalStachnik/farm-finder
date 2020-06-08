@@ -38,6 +38,7 @@ function HomePage() {
             type="text"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
+            placeholder="Search..."
           />
           <button>Search</button>
         </form>

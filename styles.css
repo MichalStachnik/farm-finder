@@ -1,3 +1,13 @@
+:root {
+  --light-blue: #e0e7ff;
+  --blue: #2e5bff;
+  --pale-green: #add9c5;
+  --green: #03a64a;
+  --forest-green: #0d8c44;
+  --light-green: #63bf8b;
+  --white: #f2f2f2;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -5,8 +15,8 @@
   font-family: Avenir, Arial, Helvetica, sans-serif;
 }
 
-body {
-  /* background: #333; */
+h1 {
+  color: var(--forest-green);
 }
 
 li {
@@ -19,4 +29,32 @@ li {
   align-items: center;
   justify-content: space-evenly;
   height: 15vh;
+}
+
+.search-container form {
+  display: flex;
+}
+
+.search-container input {
+  min-height: 60px;
+  border: 1px solid var(--light-blue);
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  padding: 1rem;
+  outline: none;
+  font-size: 18px;
+}
+
+.search-container button {
+  min-height: 60px;
+  background: var(--white);
+  color: var(--light-green);
+  border: 1px solid var(--light-blue);
+  border-radius: 0 5px 5px 0;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.search-container button:focus {
+  outline: none;
 }
