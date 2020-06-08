@@ -3,8 +3,9 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 import styles from './FarmMapGL.module.css';
 
-export default function FarmMapGL({ features }) {
+export default function FarmMapGL({ features, selectedFeature }) {
   console.log('the features', features);
+  console.log('farmmapgl selected', selectedFeature);
 
   const [viewport, setViewport] = useState({
     latitude: 41,
@@ -13,6 +14,20 @@ export default function FarmMapGL({ features }) {
     height: '100%',
     zoom: 8,
   });
+
+  if (selectedFeature) {
+    // set center
+    console.log('setCenter', selectedFeature);
+    const [selected] = features.filter(
+      (feature) => feature.id === selectedFeature
+    );
+    console.log('selected after filter', selected);
+    // setViewport({
+    //   ...viewport,
+    //   latidude: selected.center[1],
+    //   longitude: selected.center[0],
+    // });
+  }
 
   const [selectedFarm, setSelectedFarm] = useState(null);
 

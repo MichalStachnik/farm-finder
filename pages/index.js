@@ -12,6 +12,7 @@ import Suggestions from '../components/Suggestions/Suggestions';
 function HomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [features, setFeatures] = useState([]);
+  const [selectedFeature, setSelectedFeature] = useState(null);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +30,11 @@ function HomePage() {
     }
   };
 
+  const handleSuggestionClick = (featureId) => {
+    console.log('handleSuggestionClick in the parent with ', featureId);
+    setSelectedFeature(featureId);
+  };
+
   return (
     <div>
       <div className="search-container">
@@ -42,10 +48,17 @@ function HomePage() {
           />
           <button>Search</button>
         </form>
-        {features.length ? <Suggestions features={features} /> : null}
+        {features.length ? (
+          <Suggestions
+            suggestionClick={handleSuggestionClick}
+            features={features}
+          />
+        ) : null}
       </div>
-      {/* {features.length ? <FarmMapGL features={features}></FarmMapGL> : null} */}
-      <FarmMapGL features={features}></FarmMapGL>
+      <FarmMapGL
+        features={features}
+        selectedFeature={selectedFeature}
+      ></FarmMapGL>
     </div>
   );
 }

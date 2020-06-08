@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 
-export default function Suggestion({ features }) {
+export default function Suggestion({ features, suggestionClick }) {
   console.log('props in suggestion', features);
+  console.log('suggestionClick in child', suggestionClick);
 
   const [selected, setSelected] = useState(null);
 
   const handleSuggestionClick = (featureId) => {
     setSelected(featureId);
+    console.log('calling it with', featureId);
+    suggestionClick(featureId);
   };
 
   return (
@@ -37,6 +40,7 @@ export default function Suggestion({ features }) {
           padding: 0.5rem;
           cursor: pointer;
           box-shadow: 0 10px 20px 0 #f2f2f2;
+          text-align: center;
 
           transition: 0.2s all ease-in-out;
         }
