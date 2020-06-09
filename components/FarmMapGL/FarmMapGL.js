@@ -3,17 +3,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 import styles from './FarmMapGL.module.css';
 
-export default function FarmMapGL({ features }) {
-  console.log('the features', features);
-
-  const [viewport, setViewport] = useState({
-    latitude: 41,
-    longitude: -74,
-    width: '100%',
-    height: '100%',
-    zoom: 8,
-  });
-
+export default function FarmMapGL({ features, viewport, setViewport }) {
   const [selectedFarm, setSelectedFarm] = useState(null);
 
   const handleViewportChange = (viewport) => {

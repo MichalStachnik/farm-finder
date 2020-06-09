@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
-export default function Suggestion({ features }) {
-  console.log('props in suggestion', features);
-
+export default function Suggestion({ features, suggestionClick }) {
   const [selected, setSelected] = useState(null);
 
   const handleSuggestionClick = (featureId) => {
     setSelected(featureId);
+    suggestionClick(featureId);
   };
 
   return (
@@ -31,12 +30,14 @@ export default function Suggestion({ features }) {
         li {
           display: flex;
           align-items: center;
+          background: #fff;
           border: 1px solid #e0e7ff;
           border-radius: 5px;
           flex: 0.15;
           padding: 0.5rem;
           cursor: pointer;
           box-shadow: 0 10px 20px 0 #f2f2f2;
+          text-align: center;
 
           transition: 0.2s all ease-in-out;
         }
