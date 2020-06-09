@@ -38,6 +38,7 @@ export default function Suggestion({ features, suggestionClick }) {
           cursor: pointer;
           box-shadow: 0 10px 20px 0 #f2f2f2;
           text-align: center;
+          pointer-events: auto;
 
           transition: 0.2s all ease-in-out;
         }

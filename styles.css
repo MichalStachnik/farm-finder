@@ -32,10 +32,12 @@ li {
   justify-content: space-evenly;
   min-height: 300px;
   width: 100%;
+  pointer-events: none;
 }
 
 .search-container form {
   display: flex;
+  pointer-events: auto;
 }
 
 .search-container input {
