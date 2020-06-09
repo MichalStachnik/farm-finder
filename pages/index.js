@@ -12,7 +12,13 @@ import Suggestions from '../components/Suggestions/Suggestions';
 function HomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [features, setFeatures] = useState([]);
-  const [selectedFeature, setSelectedFeature] = useState(null);
+  const [viewport, setViewport] = useState({
+    latitude: 41,
+    longitude: -74,
+    width: '100%',
+    height: '100%',
+    zoom: 8,
+  });
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -31,8 +37,13 @@ function HomePage() {
   };
 
   const handleSuggestionClick = (featureId) => {
-    console.log('handleSuggestionClick in the parent with ', featureId);
-    setSelectedFeature(featureId);
+    const [selected] = features.filter((feature) => feature.id === featureId);
+
+    setViewport({
+      ...viewport,
+      latitude: selected.center[1],
+      longitude: selected.center[0],
+    });
   };
 
   return (
@@ -56,8 +67,9 @@ function HomePage() {
         ) : null}
       </div>
       <FarmMapGL
+        viewport={viewport}
+        setViewport={setViewport}
         features={features}
-        selectedFeature={selectedFeature}
       ></FarmMapGL>
     </div>
   );
