@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 
 export default function Suggestion({ features, suggestionClick }) {
-  console.log('props in suggestion', features);
-  console.log('suggestionClick in child', suggestionClick);
-
   const [selected, setSelected] = useState(null);
 
   const handleSuggestionClick = (featureId) => {
     setSelected(featureId);
-    console.log('calling it with', featureId);
     suggestionClick(featureId);
   };
 

@@ -7,7 +7,6 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
   const [selectedFarm, setSelectedFarm] = useState(null);
 
   const handleViewportChange = (viewport) => {
-    console.log('handleing viewport change', viewport);
     setViewport(viewport);
   };
 

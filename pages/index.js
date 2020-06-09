@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic';
 
 import ReactMapGL from 'react-map-gl';
 
+import { getFeatures } from '../services/api.service';
+
 const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
   ssr: false,
 });
@@ -22,18 +24,8 @@ function HomePage() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const res = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchValue}.json?access_token=${process.env.MAPBOX_KEY}`
-      );
-      const json = await res.json();
-      console.log('json: ', json);
-      setFeatures(json.features);
-    } catch (error) {
-      console.log('error sending request');
-      console.error(error);
-    }
+    const { attribution, features } = await getFeatures(searchValue);
+    setFeatures(features);
   };
 
   const handleSuggestionClick = (featureId) => {
