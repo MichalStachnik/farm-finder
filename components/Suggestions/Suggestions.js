@@ -30,6 +30,7 @@ export default function Suggestion({ features, suggestionClick }) {
         li {
           display: flex;
           align-items: center;
+          background: #fff;
           border: 1px solid #e0e7ff;
           border-radius: 5px;
           flex: 0.15;
