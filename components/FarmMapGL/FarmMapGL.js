@@ -12,11 +12,6 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
 
   return (
     <div className={styles.farmMapContainer}>
-      {/* {features.length
-        ? features.map((feature) => {
-            return <div key={feature.id}>{feature.center}</div>;
-          })
-        : null} */}
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={process.env.MAPBOX_KEY}
@@ -41,7 +36,6 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
               );
             })
           : null}
-
         {selectedFarm ? (
           <Popup
             longitude={selectedFarm.center[0]}
