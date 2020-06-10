@@ -36,11 +36,14 @@ li {
 }
 
 .search-container form {
+  width: 30%;
   display: flex;
   pointer-events: auto;
+  margin-bottom: 1rem;
 }
 
 .search-container input {
+  flex: 1;
   min-height: 60px;
   border: 1px solid var(--light-blue);
   border-right: none;

@@ -22,18 +22,25 @@ export default function Suggestion({ features, suggestionClick }) {
         ))}
       </ul>
       <style jsx>{`
+        div {
+          width: 30%;
+        }
+
         ul {
           display: flex;
+          flex-direction: column;
           justify-content: space-around;
         }
 
         li {
+          font-size: 0.9rem;
+          min-height: 60px;
+          margin-bottom: 1rem;
           display: flex;
           align-items: center;
           background: #fff;
           border: 1px solid #e0e7ff;
           border-radius: 5px;
-          flex: 0.15;
           padding: 0.5rem;
           cursor: pointer;
           box-shadow: 0 10px 20px 0 #f2f2f2;
