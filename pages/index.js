@@ -12,6 +12,7 @@ import Suggestions from '../components/Suggestions/Suggestions';
 function HomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [features, setFeatures] = useState([]);
+  const [showingSuggestions, setShowingSuggestions] = useState(false);
   const [viewport, setViewport] = useState({
     latitude: 41,
     longitude: -74,
@@ -36,6 +37,10 @@ function HomePage() {
     }
   };
 
+  const handleInputFocus = () => {
+    setShowingSuggestions(true);
+  };
+
   const handleSuggestionClick = (featureId) => {
     const [selected] = features.filter((feature) => feature.id === featureId);
 
@@ -44,6 +49,7 @@ function HomePage() {
       latitude: selected.center[1],
       longitude: selected.center[0],
     });
+    setShowingSuggestions(false);
   };
 
   return (
@@ -55,11 +61,12 @@ function HomePage() {
             type="text"
             value={searchValue}
             onChange={handleInputChange}
+            onFocus={handleInputFocus}
             placeholder="Search..."
           />
           <button>Search</button>
         </form>
-        {features.length ? (
+        {showingSuggestions && searchValue.length && features.length ? (
           <Suggestions
             suggestionClick={handleSuggestionClick}
             features={features}
