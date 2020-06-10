@@ -19,7 +19,7 @@ function HomePage() {
     longitude: -74,
     width: '100%',
     height: '100%',
-    zoom: 8,
+    zoom: 6,
   });
 
   const onSubmit = async (e) => {

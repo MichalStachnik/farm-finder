@@ -42,13 +42,12 @@ export default function Suggestion({ features, suggestionClick }) {
 
           transition: 0.2s all ease-in-out;
         }
-
         li:hover {
-          border-color: #2e5bff;
+          border-color: var(--pale-green);
         }
 
         .selected {
-          border-color: #2e5bff;
+          border-color: var(--pale-green);
         }
       `}</style>
     </div>
