@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "name": "Salingers Orchard",
+      "latitude": "41.362090",
+      "longitude": "-73.636570"
+    },
+    {
+      "name": "Agriventures Agway",
+      "latitude": "41.392680",
+      "longitude": "-73.509120"
+    },
+    {
+      "name": "Harvest Moon Farm & Orchard",
+      "latitude": "41.349830",
+      "longitude": "-73.634540"
+    }
+  ]
+}

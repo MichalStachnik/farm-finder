@@ -49,6 +49,7 @@ export default function Suggestion({ features, suggestionClick }) {
 
           transition: 0.2s all ease-in-out;
         }
+
         li:hover {
           border-color: var(--pale-green);
         }

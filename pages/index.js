@@ -54,18 +54,22 @@ function HomePage() {
 
   return (
     <div>
-      <div className="search-container">
-        <h1>Welcome to Farm Finder</h1>
-        <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            value={searchValue}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            placeholder="Search..."
-          />
-          <button>Search</button>
-        </form>
+      <div className="top-container">
+        <div className="search-container">
+          <h1>Welcome to Farm Finder</h1>
+          <form onSubmit={onSubmit}>
+            <input
+              type="text"
+              value={searchValue}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              placeholder="Search..."
+            />
+            <button>
+              <img src="/search-location-solid.svg" alt="search location" />
+            </button>
+          </form>
+        </div>
         {showingSuggestions && searchValue.length && features.length ? (
           <Suggestions
             suggestionClick={handleSuggestionClick}
