@@ -44,7 +44,9 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
             latitude={Number(selectedFarm.latitude)}
             onClose={() => setSelectedFarm(null)}
           >
-            <div>farm:</div>
+            <div>
+              <h5>{selectedFarm.name}</h5>
+            </div>
           </Popup>
         ) : null}
       </ReactMapGL>
