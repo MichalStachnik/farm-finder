@@ -35,7 +35,8 @@ li {
 }
 
 .top-container .search-container {
-  height: 20vh;
+  margin-top: 2vh;
+  height: 15vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

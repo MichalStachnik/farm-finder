@@ -24,8 +24,8 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
               return (
                 <Marker
                   key={farm.name}
-                  longitude={parseFloat(farm.longitude)}
-                  latitude={parseFloat(farm.latitude)}
+                  longitude={Number(farm.longitude)}
+                  latitude={Number(farm.latitude)}
                 >
                   <div onClick={(e) => setSelectedFarm(farm)}>
                     <img
@@ -40,11 +40,13 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
           : null}
         {selectedFarm ? (
           <Popup
-            longitude={selectedFarm.center[0]}
-            latitude={selectedFarm.center[1]}
+            longitude={Number(selectedFarm.longitude)}
+            latitude={Number(selectedFarm.latitude)}
             onClose={() => setSelectedFarm(null)}
           >
-            <div>farm:</div>
+            <div>
+              <h5>{selectedFarm.name}</h5>
+            </div>
           </Popup>
         ) : null}
       </ReactMapGL>
