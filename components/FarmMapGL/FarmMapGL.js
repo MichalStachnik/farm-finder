@@ -6,7 +6,6 @@ import styles from './FarmMapGL.module.css';
 import data from '../../public/data.json';
 
 export default function FarmMapGL({ features, viewport, setViewport }) {
-  console.log('our farm data', data);
   const [selectedFarm, setSelectedFarm] = useState(null);
 
   const handleViewportChange = (viewport) => {
@@ -20,15 +19,15 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
         mapboxApiAccessToken={process.env.MAPBOX_KEY}
         onViewportChange={handleViewportChange}
       >
-        {features.length
-          ? features.map((feature) => {
+        {data.data.length
+          ? data.data.map((farm) => {
               return (
                 <Marker
-                  key={feature.id}
-                  longitude={feature.center[0]}
-                  latitude={feature.center[1]}
+                  key={farm.name}
+                  longitude={parseFloat(farm.longitude)}
+                  latitude={parseFloat(farm.latitude)}
                 >
-                  <div onClick={(e) => setSelectedFarm(feature)}>
+                  <div onClick={(e) => setSelectedFarm(farm)}>
                     <img
                       className={styles.markerContainerImg}
                       src="/seedling-solid.svg"
