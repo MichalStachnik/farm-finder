@@ -43,6 +43,9 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
             longitude={Number(selectedFarm.longitude)}
             latitude={Number(selectedFarm.latitude)}
             onClose={() => setSelectedFarm(null)}
+            anchor="left"
+            offsetLeft={20}
+            offsetTop={5}
           >
             <div>
               <h5>{selectedFarm.name}</h5>
