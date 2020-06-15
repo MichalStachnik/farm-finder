@@ -11,13 +11,13 @@ import Suggestions from '../components/Suggestions/Suggestions';
 
 const debounce = (fn, time) => {
   let timeoutID;
-  return (...args) => {
+  return (arg) => {
     if (timeoutID) {
       clearTimeout(timeoutID);
     }
 
     timeoutID = setTimeout(() => {
-      fn(args);
+      fn(arg);
     }, time);
   };
 };
@@ -41,16 +41,13 @@ function HomePage() {
     setFeatures(features);
   };
 
-  const doSomething = async ([sv]) => {
-    console.log('doing something called...');
-    console.log(sv);
-
-    const { attribution, features } = await getFeatures(sv);
+  const search = async (searchValue) => {
+    const { attribution, features } = await getFeatures(searchValue);
     setFeatures(features);
   };
 
   const makeDebouncedQuery = useCallback(
-    debounce((val) => doSomething(val), 1500),
+    debounce((val) => search(val), 1500),
     []
   );
 

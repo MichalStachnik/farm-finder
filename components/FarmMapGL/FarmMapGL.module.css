@@ -10,3 +10,8 @@
   height: 20px;
   fill: #adff2f;
 }
+
+.card {
+  height: 100px;
+  background: #333;
+}

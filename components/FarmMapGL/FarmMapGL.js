@@ -43,12 +43,17 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
             longitude={Number(selectedFarm.longitude)}
             latitude={Number(selectedFarm.latitude)}
             onClose={() => setSelectedFarm(null)}
+            closeOnClick={false}
             anchor="left"
             offsetLeft={20}
             offsetTop={5}
           >
             <div>
               <h5>{selectedFarm.name}</h5>
+              <a href={selectedFarm.website} target="_blank">
+                {selectedFarm.website}
+              </a>
+              <div className={styles.card}></div>
             </div>
           </Popup>
         ) : null}
