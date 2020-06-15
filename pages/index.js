@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import ReactMapGL from 'react-map-gl';
 
@@ -8,6 +8,19 @@ const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
   ssr: false,
 });
 import Suggestions from '../components/Suggestions/Suggestions';
+
+const debounce = (fn, time) => {
+  let timeoutID;
+  return (...args) => {
+    if (timeoutID) {
+      clearTimeout(timeoutID);
+    }
+
+    timeoutID = setTimeout(() => {
+      fn(args);
+    }, time);
+  };
+};
 
 function HomePage() {
   const [searchValue, setSearchValue] = useState('');
@@ -28,13 +41,22 @@ function HomePage() {
     setFeatures(features);
   };
 
+  const doSomething = async ([sv]) => {
+    console.log('doing something called...');
+    console.log(sv);
+
+    const { attribution, features } = await getFeatures(sv);
+    setFeatures(features);
+  };
+
+  const makeDebouncedQuery = useCallback(
+    debounce((val) => doSomething(val), 1500),
+    []
+  );
+
   const handleInputChange = async (e) => {
     setSearchValue(e.target.value);
-
-    if (searchValue.length > 2) {
-      const { attribution, features } = await getFeatures(searchValue);
-      setFeatures(features);
-    }
+    makeDebouncedQuery(e.target.value);
   };
 
   const handleInputFocus = () => {
