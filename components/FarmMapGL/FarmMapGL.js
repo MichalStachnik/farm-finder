@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
+import FarmPopup from '../FarmPopup/FarmPopup';
+
 import styles from './FarmMapGL.module.css';
 
 import data from '../../public/data.json';
@@ -48,13 +50,7 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
             offsetLeft={20}
             offsetTop={5}
           >
-            <div>
-              <h5>{selectedFarm.name}</h5>
-              <a href={selectedFarm.website} target="_blank">
-                {selectedFarm.website}
-              </a>
-              <div className={styles.card}></div>
-            </div>
+            <FarmPopup selectedFarm={selectedFarm} />
           </Popup>
         ) : null}
       </ReactMapGL>
