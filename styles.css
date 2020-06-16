@@ -78,3 +78,7 @@ li {
 .top-container button:focus {
   outline: none;
 }
+
+.mapboxgl-popup-content {
+  padding: 0 !important;
+}

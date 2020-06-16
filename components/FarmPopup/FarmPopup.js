@@ -25,12 +25,17 @@ export default function FarmPopup({ selectedFarm }) {
       </div>
       <style jsx>{`
         .container {
-          background: #333;
+          background: #eee;
+          padding: 1rem;
+        }
+
+        a {
+          color: var(--light-green);
         }
 
         img {
-          width: 20px;
-          height: 20px;
+          width: 35px;
+          height: 35px;
         }
       `}</style>
     </div>
