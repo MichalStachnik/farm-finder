@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
+import FarmPopup from '../FarmPopup/FarmPopup';
+
 import styles from './FarmMapGL.module.css';
 
 import data from '../../public/data.json';
@@ -43,10 +45,12 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
             longitude={Number(selectedFarm.longitude)}
             latitude={Number(selectedFarm.latitude)}
             onClose={() => setSelectedFarm(null)}
+            closeOnClick={false}
+            anchor="left"
+            offsetLeft={20}
+            offsetTop={5}
           >
-            <div>
-              <h5>{selectedFarm.name}</h5>
-            </div>
+            <FarmPopup selectedFarm={selectedFarm} />
           </Popup>
         ) : null}
       </ReactMapGL>
