@@ -8,6 +8,7 @@ const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
   ssr: false,
 });
 import Suggestions from '../components/Suggestions/Suggestions';
+import Navbar from '../components/Navbar/Navbar';
 
 const debounce = (fn, time) => {
   let timeoutID;
@@ -73,6 +74,7 @@ function HomePage() {
 
   return (
     <div>
+      <Navbar />
       <div className="top-container">
         <div className="search-container">
           <h1>Welcome to Farm Finder</h1>

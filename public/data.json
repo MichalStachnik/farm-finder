@@ -4,19 +4,49 @@
       "name": "Salingers Orchard",
       "website": "http://www.salingersorchard.net/",
       "latitude": "41.362090",
-      "longitude": "-73.636570"
+      "longitude": "-73.636570",
+      "products": [
+        {
+          "type": "vegatables",
+          "image": "vegetable.svg"
+        },
+        {
+          "type": "pork",
+          "image": "pig.svg"
+        }
+      ]
     },
     {
       "name": "Agriventures Agway",
       "website": "https://agwayct.com/",
       "latitude": "41.392680",
-      "longitude": "-73.509120"
+      "longitude": "-73.509120",
+      "products": [
+        {
+          "type": "vegatables",
+          "image": "vegetable.svg"
+        },
+        {
+          "type": "seeds",
+          "image": "seed.svg"
+        },
+        {
+          "type": "poultry",
+          "image": "chicken.svg"
+        }
+      ]
     },
     {
       "name": "Harvest Moon Farm & Orchard",
       "website": "https://harvestmoonfarmandorchard.com/",
       "latitude": "41.349830",
-      "longitude": "-73.634540"
+      "longitude": "-73.634540",
+      "products": [
+        {
+          "type": "vegatables",
+          "image": "vegetable.svg"
+        }
+      ]
     }
   ]
 }

@@ -3,34 +3,43 @@ import React from 'react';
 export default function FarmPopup({ selectedFarm }) {
   return (
     <div className="container">
-      <h5>{selectedFarm.name}</h5>
-      <a href={selectedFarm.website} target="_blank">
-        {selectedFarm.website}
-      </a>
+      <h5>
+        <a href={selectedFarm.website} target="_blank">
+          {selectedFarm.name}
+        </a>
+      </h5>
       <div>
         <ul>
-          <li>
-            <img src="/vegetable.svg" alt="vegtables" />
-          </li>
-          <li>
-            <img src="/chicken.svg" alt="chicken" />
-          </li>
-          <li>
-            <img src="/pig.svg" alt="pig" />
-          </li>
-          <li>
-            <img src="/cow.svg" alt="cow" />
-          </li>
+          {selectedFarm.products.map((product) => {
+            return (
+              <li key={product.type}>
+                <img src={product.image} alt={product.type} />
+              </li>
+            );
+          })}
         </ul>
       </div>
       <style jsx>{`
         .container {
-          background: #eee;
+          background: #fff;
           padding: 1rem;
+          border: 1px solid rgba(46, 91, 255, 0.08);
+          border-radius: 1px;
+        }
+
+        h5 {
+          text-align: center;
+          margin-bottom: 20px;
         }
 
         a {
           color: var(--light-green);
+        }
+
+        ul {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          place-items: center;
         }
 
         img {
