@@ -41,29 +41,6 @@ function HomePage() {
         changeSearch={handleSearchChange}
         features={features}
       />
-      {/* <div className="top-container">
-        <div className="search-container">
-          <h1>Welcome to Farm Finder</h1>
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              value={searchValue}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-              placeholder="Search for local farms..."
-            />
-            <button>
-              <img src="/search-location-solid.svg" alt="search location" />
-            </button>
-          </form>
-        </div>
-        {showingSuggestions && searchValue.length && features.length ? (
-          <Suggestions
-            suggestionClick={handleSuggestionClick}
-            features={features}
-          />
-        ) : null}
-      </div> */}
       <FarmMapGL viewport={viewport} setViewport={setViewport}></FarmMapGL>
     </div>
   );

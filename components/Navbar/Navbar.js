@@ -1,18 +1,7 @@
 import { useState, useCallback } from 'react';
 import Suggestions from '../Suggestions/Suggestions';
 
-const debounce = (fn, time) => {
-  let timeoutID;
-  return (arg) => {
-    if (timeoutID) {
-      clearTimeout(timeoutID);
-    }
-
-    timeoutID = setTimeout(() => {
-      fn(arg);
-    }, time);
-  };
-};
+import { debounce } from '../../utils/debounce';
 
 export default function Navbar({ changeViewport, changeSearch, features }) {
   const [searchValue, setSearchValue] = useState('');
