@@ -23,7 +23,6 @@ export default function Navbar({ changeViewport, changeSearch, features }) {
   };
 
   const search = (searchValue) => {
-    console.log('searching in child', searchValue);
     changeSearch(searchValue);
   };
 
@@ -69,21 +68,31 @@ export default function Navbar({ changeViewport, changeSearch, features }) {
           <li>About</li>
         </ul>
       </div>
-      {showingSuggestions && searchValue.length && features.length ? (
-        <Suggestions
-          suggestionClick={handleSuggestionClick}
-          features={features}
-        />
-      ) : null}
+      <div className="suggestions-container">
+        {showingSuggestions && searchValue.length && features.length ? (
+          <Suggestions
+            suggestionClick={handleSuggestionClick}
+            features={features}
+          />
+        ) : null}
+      </div>
       <style jsx>{`
         nav {
+          position: absolute;
+          width: 100%;
           display: grid;
           grid-template-columns: 1fr 2fr 1fr;
           grid-template-rows: 60px;
+          grid-template-areas:
+            'logo search links'
+            '. suggestions .';
           place-items: center;
-          background: var(--light-green);
-
           color: #222;
+          z-index: 1;
+        }
+
+        .suggestions-container {
+          grid-area: suggestions;
         }
 
         .search-container {

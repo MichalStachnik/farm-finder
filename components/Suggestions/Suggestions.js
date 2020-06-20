@@ -23,10 +23,6 @@ export default function Suggestion({ features, suggestionClick }) {
         ))}
       </ul>
       <style jsx>{`
-        div {
-          width: 30%;
-        }
-
         ul {
           display: flex;
           flex-direction: column;

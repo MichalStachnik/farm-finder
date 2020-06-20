@@ -21,7 +21,6 @@ function HomePage() {
   });
 
   const handleSearchChange = async (searchValue) => {
-    console.log('in parent with', searchValue);
     const { attribution, features } = await getFeatures(searchValue);
     setFeatures(features);
   };
