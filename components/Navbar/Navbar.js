@@ -3,6 +3,8 @@ import Suggestions from '../Suggestions/Suggestions';
 
 import { debounce } from '../../utils/debounce';
 
+import styles from './Navbar.module.css';
+
 export default function Navbar({ changeViewport, changeSearch, features }) {
   const [searchValue, setSearchValue] = useState('');
   const [showingSuggestions, setShowingSuggestions] = useState(false);
@@ -44,31 +46,36 @@ export default function Navbar({ changeViewport, changeSearch, features }) {
   };
 
   return (
-    <nav>
-      <div className="logo">
+    <nav className={styles.nav}>
+      <div>
         <h1>Farm Finder</h1>
       </div>
-      <div className="search-container">
-        <form onSubmit={onSubmit}>
+      <div className={styles.searchContainer}>
+        <form className={styles.form} onSubmit={onSubmit}>
           <input
+            className={styles.input}
             type="text"
             placeholder="Search for local farms..."
             value={searchValue}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
           />
-          <button>
-            <img src="/search-location-solid.svg" alt="search location" />
+          <button className={styles.button}>
+            <img
+              className={styles.img}
+              src="/search-location-solid.svg"
+              alt="search location"
+            />
           </button>
         </form>
       </div>
-      <div className="links">
-        <ul>
+      <div className={styles.links}>
+        <ul className={styles.ul}>
           <li>Home</li>
           <li>About</li>
         </ul>
       </div>
-      <div className="suggestions-container">
+      <div className={styles.suggestionsContainer}>
         {showingSuggestions && searchValue.length && features.length ? (
           <Suggestions
             suggestionClick={handleSuggestionClick}
@@ -76,71 +83,6 @@ export default function Navbar({ changeViewport, changeSearch, features }) {
           />
         ) : null}
       </div>
-      <style jsx>{`
-        nav {
-          position: absolute;
-          width: 100%;
-          display: grid;
-          grid-template-columns: 1fr 2fr 1fr;
-          grid-template-rows: 60px;
-          grid-template-areas:
-            'logo search links'
-            '. suggestions .';
-          place-items: center;
-          color: #222;
-          z-index: 1;
-        }
-
-        .suggestions-container {
-          grid-area: suggestions;
-        }
-
-        .search-container {
-          width: 60%;
-        }
-
-        form {
-          display: flex;
-        }
-
-        input {
-          flex: 1;
-          min-height: 30px;
-          border-right: none;
-          border-radius: 5px 0 0 5px;
-          padding: 0.5rem;
-          outline: none;
-          font-size: 14px;
-        }
-
-        button {
-          flex: 0.25;
-          min-height: 30px;
-          display: flex;
-          align-items: center;
-          background: #373737;
-          border: none;
-          border-radius: 0 5px 5px 0;
-          padding: 0.5rem;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        img {
-          width: 18px;
-        }
-
-        .links {
-          width: 100%;
-        }
-
-        ul {
-          display: flex;
-          justify-content: space-evenly;
-        }
-      `}</style>
     </nav>
   );
 }
