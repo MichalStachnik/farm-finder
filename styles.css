@@ -15,10 +15,6 @@
   font-family: Avenir, Arial, Helvetica, sans-serif;
 }
 
-h1 {
-  color: var(--light-green);
-}
-
 li {
   list-style-type: none;
 }

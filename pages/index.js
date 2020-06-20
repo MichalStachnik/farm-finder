@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import ReactMapGL from 'react-map-gl';
 
@@ -10,23 +10,8 @@ const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
 import Suggestions from '../components/Suggestions/Suggestions';
 import Navbar from '../components/Navbar/Navbar';
 
-const debounce = (fn, time) => {
-  let timeoutID;
-  return (arg) => {
-    if (timeoutID) {
-      clearTimeout(timeoutID);
-    }
-
-    timeoutID = setTimeout(() => {
-      fn(arg);
-    }, time);
-  };
-};
-
 function HomePage() {
-  const [searchValue, setSearchValue] = useState('');
   const [features, setFeatures] = useState([]);
-  const [showingSuggestions, setShowingSuggestions] = useState(false);
   const [viewport, setViewport] = useState({
     latitude: 41,
     longitude: -74,
@@ -35,47 +20,28 @@ function HomePage() {
     zoom: 6,
   });
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (searchValue.length === 0) return;
+  const handleSearchChange = async (searchValue) => {
+    console.log('in parent with', searchValue);
     const { attribution, features } = await getFeatures(searchValue);
     setFeatures(features);
   };
 
-  const search = async (searchValue) => {
-    const { attribution, features } = await getFeatures(searchValue);
-    setFeatures(features);
-  };
-
-  const makeDebouncedQuery = useCallback(
-    debounce((val) => search(val), 1500),
-    []
-  );
-
-  const handleInputChange = async (e) => {
-    setSearchValue(e.target.value);
-    makeDebouncedQuery(e.target.value);
-  };
-
-  const handleInputFocus = () => {
-    setShowingSuggestions(true);
-  };
-
-  const handleSuggestionClick = (featureId) => {
-    const [selected] = features.filter((feature) => feature.id === featureId);
-
+  const handleViewportChange = ({ latitude, longitude }) => {
     setViewport({
       ...viewport,
-      latitude: selected.center[1],
-      longitude: selected.center[0],
+      latitude: latitude,
+      longitude: longitude,
     });
-    setShowingSuggestions(false);
   };
 
   return (
     <div>
-      <Navbar />
-      <div className="top-container">
+      <Navbar
+        changeViewport={handleViewportChange}
+        changeSearch={handleSearchChange}
+        features={features}
+      />
+      {/* <div className="top-container">
         <div className="search-container">
           <h1>Welcome to Farm Finder</h1>
           <form onSubmit={onSubmit}>
@@ -84,7 +50,7 @@ function HomePage() {
               value={searchValue}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
-              placeholder="Search..."
+              placeholder="Search for local farms..."
             />
             <button>
               <img src="/search-location-solid.svg" alt="search location" />
@@ -97,12 +63,8 @@ function HomePage() {
             features={features}
           />
         ) : null}
-      </div>
-      <FarmMapGL
-        viewport={viewport}
-        setViewport={setViewport}
-        features={features}
-      ></FarmMapGL>
+      </div> */}
+      <FarmMapGL viewport={viewport} setViewport={setViewport}></FarmMapGL>
     </div>
   );
 }

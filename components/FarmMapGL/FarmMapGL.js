@@ -7,7 +7,7 @@ import styles from './FarmMapGL.module.css';
 
 import data from '../../public/data.json';
 
-export default function FarmMapGL({ features, viewport, setViewport }) {
+export default function FarmMapGL({ viewport, setViewport }) {
   const [selectedFarm, setSelectedFarm] = useState(null);
 
   const handleViewportChange = (viewport) => {
