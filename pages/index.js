@@ -38,11 +38,10 @@ function HomePage() {
     <div>
       <Head>
         <title>Farm Finder</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           name="description"
           content="Find local farms and help reduce food waste and spoilage due to supply chain break downs."
-        ></meta>
+        />
       </Head>
       <Navbar
         changeViewport={handleViewportChange}
