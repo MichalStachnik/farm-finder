@@ -8,11 +8,11 @@
       "products": [
         {
           "type": "vegatables",
-          "image": "vegetable.svg"
+          "image": "vegetables.svg"
         },
         {
           "type": "pork",
-          "image": "pig.svg"
+          "image": "pork.svg"
         }
       ]
     },
@@ -24,15 +24,15 @@
       "products": [
         {
           "type": "vegatables",
-          "image": "vegetable.svg"
+          "image": "vegetables.svg"
         },
         {
           "type": "seeds",
-          "image": "seed.svg"
+          "image": "seeds.svg"
         },
         {
           "type": "poultry",
-          "image": "chicken.svg"
+          "image": "poultry.svg"
         }
       ]
     },
@@ -44,7 +44,7 @@
       "products": [
         {
           "type": "vegatables",
-          "image": "vegetable.svg"
+          "image": "vegetables.svg"
         }
       ]
     }
