@@ -52,8 +52,10 @@ export default function Navbar({ changeViewport, changeSearch, features }) {
       </div>
       <div className={styles.searchContainer}>
         <form className={styles.form} onSubmit={onSubmit}>
+          <label htmlFor="search-input">Search</label>
           <input
             className={styles.input}
+            id="search-input"
             type="text"
             placeholder="Search for local farms..."
             value={searchValue}

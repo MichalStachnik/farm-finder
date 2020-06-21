@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import ReactMapGL from 'react-map-gl';
 
 import { getFeatures } from '../services/api.service';
@@ -35,12 +36,22 @@ function HomePage() {
 
   return (
     <div>
+      <Head>
+        <title>Farm Finder</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="description"
+          content="Find local farms and help reduce food waste and spoilage due to supply chain break downs."
+        ></meta>
+      </Head>
       <Navbar
         changeViewport={handleViewportChange}
         changeSearch={handleSearchChange}
         features={features}
       />
-      <FarmMapGL viewport={viewport} setViewport={setViewport}></FarmMapGL>
+      <main>
+        <FarmMapGL viewport={viewport} setViewport={setViewport}></FarmMapGL>
+      </main>
     </div>
   );
 }

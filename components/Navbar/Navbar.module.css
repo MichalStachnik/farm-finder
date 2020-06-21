@@ -29,6 +29,10 @@
   display: flex;
 }
 
+/* .form label {
+  display: none;
+} */
+
 .input {
   flex: 1;
   min-height: 30px;
