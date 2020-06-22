@@ -29,8 +29,8 @@ function HomePage() {
   const handleViewportChange = ({ latitude, longitude }) => {
     setViewport({
       ...viewport,
-      latitude: latitude,
-      longitude: longitude,
+      latitude,
+      longitude,
     });
   };
 
