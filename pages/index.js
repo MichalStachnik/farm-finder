@@ -50,7 +50,8 @@ function HomePage() {
     });
   };
 
-  const { data, error } = useSWR('{ hello }', fetcher);
+  // const { data, error } = useSWR('{ hello }', fetcher);
+  const { data, error } = useSWR('{ farms { name } }', fetcher);
 
   console.log('data', data);
   console.log('error', error);

@@ -16,16 +16,11 @@ const typeDefs = gql`
 
   type Query {
     farms: [Farm]
-    hello: String!
   }
 `;
 
 const resolvers = {
   Query: {
-    hello: (_parent, _args, _ctx) => {
-      return 'hey';
-    },
-
     farms: (_parent, _args, _ctx) => {
       return _ctx.db
         .collection('farms')
