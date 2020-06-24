@@ -1,21 +1,22 @@
-import { ApolloServer, gql } from 'apollo-server-express';
-import express from 'express';
-import Server from 'next/dist/next-server/server/next-server';
+import { ApolloServer, gql } from 'apollo-server-micro';
+import { makeExecutableSchema } from 'graphql-tools';
+import { MongoClient } from 'mongodb';
+
+const connection_string = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-ii9ft.mongodb.net/farm-fresh?retryWrites=true&w=majority`;
 
 const typeDefs = gql`
-  type Query {
-    hello: String!
-  }
-
   type Farm {
     id: ID!
     name: String
-    website: String
-    products: [Product]
   }
 
   type Product {
     type: String
+  }
+
+  type Query {
+    farms: [Farm]
+    hello: String!
   }
 `;
 
@@ -24,24 +25,53 @@ const resolvers = {
     hello: (_parent, _args, _ctx) => {
       return 'hey';
     },
+
+    farms: (_parent, _args, _ctx) => {
+      return _ctx.db
+        .collection('farms')
+        .findOne()
+        .then((data) => data.farms);
+    },
   },
 };
 
-const apolloServer = new ApolloServer({
+const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
 
-const startServer = async () => {
-  const app = express();
+let db;
 
-  apolloServer.applyMiddleware({ app });
+const apolloServer = new ApolloServer({
+  schema,
+  context: async () => {
+    if (!db) {
+      try {
+        const dbClient = new MongoClient(connection_string, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
 
-  app.listen(5000, () => console.log('hello on 5000'));
+        if (!dbClient.isConnected()) {
+          console.log('connecting...');
+          await dbClient.connect();
+        }
+        db = dbClient.db('farm-fresh');
+      } catch (err) {
+        console.log('error connecting to mongo', err);
+      }
+    }
+
+    return { db };
+  },
+});
+
+const handler = apolloServer.createHandler({ path: '/api/farms' });
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
 };
 
-startServer();
-
-export default (req, res) => {
-  res.end('hello from farms');
-};
+export default handler;
