@@ -12,4 +12,4 @@ const FarmSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('farm', FarmSchema);
+module.exports = mongoose.model.Farm || mongoose.model('Farm', FarmSchema);
