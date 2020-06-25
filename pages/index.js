@@ -17,6 +17,7 @@ const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
 });
 import Suggestions from '../components/Suggestions/Suggestions';
 import Navbar from '../components/Navbar/Navbar';
+import connectToDB from '../services/connectToDb.service';
 
 const fetcher = (query) =>
   fetch('/api/farms', {
@@ -61,8 +62,6 @@ function Index() {
   //   fetcher
   // );
 
-  connectToDB();
-
   const fetchFarms = async () => {
     const res = await fetch('/api/farms-rest');
     const data = await res.json();
@@ -70,7 +69,12 @@ function Index() {
     setFarms(data.farms[0].farms);
   };
 
+  const initConn = async () => {
+    await connectToDB();
+  };
+
   useEffect(() => {
+    initConn();
     fetchFarms();
   }, []);
 

@@ -18,11 +18,8 @@ import Farm from '../../models/Farm';
 //   }
 // };
 
-import connectToDB from '../../services/connectToDb.service';
-
 export default async (req, res) => {
   try {
-    connectToDB();
     let farms = await Farm.find({});
     console.log('the farms we fetched', farms);
     // res.setHeader('Content-Type', 'application/json');
