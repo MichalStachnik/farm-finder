@@ -12,8 +12,8 @@ export default function FarmPopup({ selectedFarm }) {
         <ul>
           {selectedFarm.products.map((product) => {
             return (
-              <li key={product.type}>
-                <img src={product.image} alt={product.type} />
+              <li key={product}>
+                <img src={`${product}.svg`} alt={product} />
               </li>
             );
           })}

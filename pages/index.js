@@ -50,11 +50,14 @@ function HomePage() {
     });
   };
 
-  // const { data, error } = useSWR('{ hello }', fetcher);
-  const { data, error } = useSWR('{ farms { name } }', fetcher);
+  const { data, error } = useSWR(
+    '{ farms { name, latitude, longitude, products } }',
+    fetcher
+  );
 
-  console.log('data', data);
-  console.log('error', error);
+  const farms = data?.farms || [];
+
+  if (error) return;
 
   return (
     <div>
@@ -71,7 +74,11 @@ function HomePage() {
         features={features}
       />
       <main>
-        <FarmMapGL viewport={viewport} setViewport={setViewport}></FarmMapGL>
+        <FarmMapGL
+          viewport={viewport}
+          setViewport={setViewport}
+          farms={farms}
+        ></FarmMapGL>
       </main>
     </div>
   );

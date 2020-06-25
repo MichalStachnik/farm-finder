@@ -8,6 +8,9 @@ const typeDefs = gql`
   type Farm {
     id: ID!
     name: String
+    latitude: String
+    longitude: String
+    products: [String]
   }
 
   type Product {
