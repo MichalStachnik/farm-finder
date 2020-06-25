@@ -7,6 +7,8 @@ import useSWR from 'swr';
 
 import { getFeatures } from '../services/api.service';
 
+import { server } from '../utils/config';
+
 const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
   ssr: false,
 });
@@ -27,7 +29,7 @@ const fetcher = (query) =>
     })
     .then((json) => json.data);
 
-function HomePage() {
+function Index({ farms }) {
   const [features, setFeatures] = useState([]);
   const [viewport, setViewport] = useState({
     latitude: 41,
@@ -36,7 +38,6 @@ function HomePage() {
     height: '100%',
     zoom: 6,
   });
-  const [farms, setFarms] = useState([]);
 
   const handleSearchChange = async (searchValue) => {
     const { attribution, features } = await getFeatures(searchValue);
@@ -55,18 +56,6 @@ function HomePage() {
   //   '{ farms { name, latitude, longitude, products } }',
   //   fetcher
   // );
-
-  const fetchFarms = async () => {
-    const res = await fetch('/api/farms-rest');
-    console.log('the res', res);
-    const data = await res.json();
-    console.log('the data', data);
-    setFarms(data.farms[0].farms);
-  };
-
-  useEffect(() => {
-    fetchFarms();
-  }, []);
 
   return (
     <div>
@@ -93,4 +82,21 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+Index.getInitialProps = async ({ req }) => {
+  // const res = await fetch(`${server}/api/farms-rest`);
+
+  let url;
+
+  if (req.headers.host === 'localhost:3000') {
+    url = 'http://localhost:3000/api/farms-rest';
+  } else {
+    url = `https://${req.headers.host}/api/farms-rest`;
+  }
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  return { farms: data.farms[0].farms };
+};
+
+export default Index;

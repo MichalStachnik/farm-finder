@@ -19,6 +19,7 @@
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.20",
     "next": "^9.4.4",
+    "next-absolute-url": "^1.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-map-gl": "^5.2.6",
