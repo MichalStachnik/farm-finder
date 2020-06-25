@@ -30,7 +30,7 @@ const fetcher = (query) =>
     })
     .then((json) => json.data);
 
-function Index({ farms }) {
+function Index() {
   const [features, setFeatures] = useState([]);
   const [viewport, setViewport] = useState({
     latitude: 41,
@@ -39,6 +39,7 @@ function Index({ farms }) {
     height: '100%',
     zoom: 6,
   });
+  const [farms, setFarms] = useState([]);
 
   const handleSearchChange = async (searchValue) => {
     const { attribution, features } = await getFeatures(searchValue);
@@ -57,6 +58,17 @@ function Index({ farms }) {
   //   '{ farms { name, latitude, longitude, products } }',
   //   fetcher
   // );
+
+  const fetchFarms = async () => {
+    const res = await fetch('/api/farms-rest');
+    const data = await res.json();
+    console.log('data back', data);
+    setFarms(data.farms[0].farms);
+  };
+
+  useEffect(() => {
+    fetchFarms();
+  }, []);
 
   return (
     <div>
@@ -83,21 +95,21 @@ function Index({ farms }) {
   );
 }
 
-Index.getInitialProps = async ({ req }) => {
-  // const res = await fetch(`${server}/api/farms-rest`);
+// Index.getInitialProps = async ({ req }) => {
+//   // const res = await fetch(`${server}/api/farms-rest`);
 
-  let url;
+//   let url;
 
-  if (req.headers.host === 'localhost:3000') {
-    url = 'http://localhost:3000/api/farms-rest';
-  } else {
-    url = `https://${req.headers.host}/api/farms-rest`;
-  }
+//   if (req.headers.host === 'localhost:3000') {
+//     url = 'http://localhost:3000/api/farms-rest';
+//   } else {
+//     url = `https://${req.headers.host}/api/farms-rest`;
+//   }
 
-  const res = await fetch(url);
-  const data = await res.json();
+//   const res = await fetch(url);
+//   const data = await res.json();
 
-  return { farms: data.farms[0].farms };
-};
+//   return { farms: data.farms[0].farms };
+// };
 
 export default Index;

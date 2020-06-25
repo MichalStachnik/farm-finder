@@ -11,9 +11,6 @@ export default (req, res) => {
     JSON.stringify({
       name: 'test ok',
       conn: connection_string,
-      mb,
-      userIs: `${user}`,
-      passIs: `${pass}`,
     })
   );
 };
