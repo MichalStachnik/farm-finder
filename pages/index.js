@@ -10,6 +10,8 @@ import { getFeatures } from '../services/api.service';
 
 import { server } from '../utils/config';
 
+import connectToDb from '../services/connectToDb.service';
+
 const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
   ssr: false,
 });
@@ -58,6 +60,8 @@ function Index() {
   //   '{ farms { name, latitude, longitude, products } }',
   //   fetcher
   // );
+
+  connectToDB();
 
   const fetchFarms = async () => {
     const res = await fetch('/api/farms-rest');
