@@ -15,6 +15,7 @@ export default (req, res) => {
       mb,
       userIs: `${user}`,
       passIs: `${pass}`,
+      testVar: `${process.env.MY_TEST_VAR}`,
     })
   );
 };
