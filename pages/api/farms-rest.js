@@ -1,32 +1,32 @@
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 import Farm from '../../models/Farm';
 
-const connection_string = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-ii9ft.mongodb.net/farm-fresh?retryWrites=true&w=majority`;
+// const connection_string = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-ii9ft.mongodb.net/farm-fresh?retryWrites=true&w=majority`;
 
-const connectToDB = async () => {
-  try {
-    const db = await mongoose.connect(connection_string, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('connecting to db...');
-    // console.log(db);
-    // console.log(db.connections);
-    console.log(db.connections[0].name);
-    console.log(db.connections[0].readyState);
-  } catch (error) {
-    console.log('error connecting to db', error);
-  }
-};
+// const connectToDB = async () => {
+//   try {
+//     db = await mongoose.connect(connection_string, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
+//     console.log('connecting to db...');
+//     console.log(db.connections[0].name);
+//     console.log(db.connections[0].readyState);
+//   } catch (error) {
+//     console.log('error connecting to db', error);
+//   }
+// };
+
+import connectToDB from '../../services/connectToDb.service';
 
 connectToDB();
 
 export default async (req, res) => {
   try {
     let farms = await Farm.find({});
-    // console.log('the farms we fetched', farms);
-    res.setHeader('Content-Type', 'application/json');
+    console.log('the farms we fetched', farms);
+    // res.setHeader('Content-Type', 'application/json');
     res.status(200).json({ msg: 'success', farms });
     // res.status(200).json({ msg: 'success' });
   } catch (error) {
