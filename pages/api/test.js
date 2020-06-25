@@ -4,6 +4,7 @@ export default (req, res) => {
 
   const user = process.env.DB_USER;
   const pass = process.env.DB_PASS;
+  console.log('this should work now');
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
