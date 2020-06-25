@@ -61,7 +61,9 @@ function Index() {
   // );
 
   const fetchFarms = async () => {
-    const res = await fetch('/api/farms-rest');
+    // const res = await fetch('/api/farms-rest');
+    const res = await fetch('/api/test');
+    console.log('the res', res);
     const data = await res.json();
     console.log('data back', data);
     setFarms(data.farms[0].farms);
