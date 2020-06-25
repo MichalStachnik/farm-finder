@@ -13,8 +13,8 @@ export default (req, res) => {
       name: 'test ok',
       conn: connection_string,
       mb,
-      userIs: user,
-      passIs: pass,
+      userIs: `${user}`,
+      passIs: `${pass}`,
     })
   );
 };
