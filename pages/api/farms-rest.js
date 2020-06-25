@@ -24,15 +24,13 @@ connectToDB();
 
 export default async (req, res) => {
   try {
-    // let farms = await Farm.find({});
+    let farms = await Farm.find({});
     // console.log('the farms we fetched', farms);
     res.setHeader('Content-Type', 'application/json');
-    // res.status(200).json({ msg: 'success', farms });
-    res.status(200).json({ msg: 'success' });
+    res.status(200).json({ msg: 'success', farms });
+    // res.status(200).json({ msg: 'success' });
   } catch (error) {
     console.log('error fetching data', error);
     res.status(400).json({ msg: 'failure to grab farm data', error });
   }
-
-  // res.end(JSON.stringify({ name: 'John Doe' }));
 };
