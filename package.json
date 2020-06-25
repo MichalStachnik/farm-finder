@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "graphql-tools": "^6.0.10",
     "mongodb": "^3.5.9",
+    "mongoose": "^5.9.20",
     "next": "^9.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

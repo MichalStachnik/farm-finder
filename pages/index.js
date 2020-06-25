@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import ReactMapGL from 'react-map-gl';
@@ -36,6 +36,7 @@ function HomePage() {
     height: '100%',
     zoom: 6,
   });
+  const [farms, setFarms] = useState([]);
 
   const handleSearchChange = async (searchValue) => {
     const { attribution, features } = await getFeatures(searchValue);
@@ -50,14 +51,22 @@ function HomePage() {
     });
   };
 
-  const { data, error } = useSWR(
-    '{ farms { name, latitude, longitude, products } }',
-    fetcher
-  );
+  // const { data, error } = useSWR(
+  //   '{ farms { name, latitude, longitude, products } }',
+  //   fetcher
+  // );
 
-  const farms = data?.farms || [];
+  const fetchFarms = async () => {
+    const res = await fetch('/api/farms-rest');
+    console.log('the res', res);
+    const data = await res.json();
+    console.log('the data', data);
+    setFarms(data.farms[0].farms);
+  };
 
-  if (error) return;
+  useEffect(() => {
+    fetchFarms();
+  }, []);
 
   return (
     <div>
