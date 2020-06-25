@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import ReactMapGL from 'react-map-gl';
+import fetch from 'isomorphic-unfetch';
 
 import useSWR from 'swr';
 
