@@ -26,12 +26,12 @@ export default async (req, res) => {
   try {
     let farms = await Farm.find({});
     console.log('the farms we fetched', farms);
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json({ msg: 'success', farms });
+    // res.setHeader('Content-Type', 'application/json');
+
+    res.status(200).json({ msg: 'success', farms });
   } catch (error) {
     console.log('error fetching data', error);
-    throw error;
+    res.status(400).json({ msg: 'failure to grab farm data', error });
   }
 
   // res.end(JSON.stringify({ name: 'John Doe' }));
