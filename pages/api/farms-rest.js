@@ -24,7 +24,7 @@ connectToDB();
 
 export default async (req, res) => {
   try {
-    let farms = await Farm.find({});
+    // let farms = await Farm.find({});
     console.log('the farms we fetched', farms);
     // res.setHeader('Content-Type', 'application/json');
 
