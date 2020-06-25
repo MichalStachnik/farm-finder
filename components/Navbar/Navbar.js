@@ -1,0 +1,90 @@
+import { useState, useCallback } from 'react';
+import Suggestions from '../Suggestions/Suggestions';
+
+import { debounce } from '../../utils/debounce';
+
+import styles from './Navbar.module.css';
+
+export default function Navbar({ changeViewport, changeSearch, features }) {
+  const [searchValue, setSearchValue] = useState('');
+  const [showingSuggestions, setShowingSuggestions] = useState(false);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (searchValue.length === 0) return;
+    changeSearch(searchValue);
+  };
+
+  const handleInputChange = async (e) => {
+    setSearchValue(e.target.value);
+    makeDebouncedQuery(e.target.value);
+  };
+
+  const handleInputFocus = () => {
+    setShowingSuggestions(true);
+  };
+
+  const search = (searchValue) => {
+    changeSearch(searchValue);
+  };
+
+  const makeDebouncedQuery = useCallback(
+    debounce((val) => search(val), 1500),
+    []
+  );
+
+  const handleSuggestionClick = (featureId) => {
+    const [selected] = features.filter((feature) => feature.id === featureId);
+
+    // Pass new viewport up
+    changeViewport({
+      latitude: selected.center[1],
+      longitude: selected.center[0],
+    });
+
+    setShowingSuggestions(false);
+  };
+
+  return (
+    <nav className={styles.nav}>
+      <div>
+        <h1>Farm Finder</h1>
+      </div>
+      <div className={styles.searchContainer}>
+        <form className={styles.form} onSubmit={onSubmit}>
+          <label htmlFor="search-input">Search</label>
+          <input
+            className={styles.input}
+            id="search-input"
+            type="text"
+            placeholder="Search for local farms..."
+            value={searchValue}
+            onChange={handleInputChange}
+            onFocus={handleInputFocus}
+          />
+          <button className={styles.button}>
+            <img
+              className={styles.img}
+              src="/search-location-solid.svg"
+              alt="search location"
+            />
+          </button>
+        </form>
+      </div>
+      <div className={styles.links}>
+        <ul className={styles.ul}>
+          <li>Home</li>
+          <li>About</li>
+        </ul>
+      </div>
+      <div className={styles.suggestionsContainer}>
+        {showingSuggestions && searchValue.length && features.length ? (
+          <Suggestions
+            suggestionClick={handleSuggestionClick}
+            features={features}
+          />
+        ) : null}
+      </div>
+    </nav>
+  );
+}

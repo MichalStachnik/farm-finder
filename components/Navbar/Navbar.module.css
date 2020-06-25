@@ -1,0 +1,72 @@
+.nav {
+  position: absolute;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 60px;
+  grid-template-areas:
+    'logo search links'
+    '. suggestions .';
+  place-items: center;
+  color: #222;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.nav > * {
+  pointer-events: auto;
+}
+
+.suggestionsContainer {
+  grid-area: suggestions;
+}
+
+.searchContainer {
+  width: 60%;
+}
+
+.form {
+  display: flex;
+}
+
+/* .form label {
+  display: none;
+} */
+
+.input {
+  flex: 1;
+  min-height: 30px;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  padding: 0.5rem;
+  outline: none;
+  font-size: 14px;
+}
+
+.button {
+  flex: 0.25;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  background: #373737;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img {
+  width: 18px;
+}
+
+.links {
+  width: 100%;
+}
+
+.ul {
+  display: flex;
+  justify-content: space-evenly;
+}

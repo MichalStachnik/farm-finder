@@ -5,9 +5,7 @@ import FarmPopup from '../FarmPopup/FarmPopup';
 
 import styles from './FarmMapGL.module.css';
 
-import data from '../../public/data.json';
-
-export default function FarmMapGL({ features, viewport, setViewport }) {
+export default function FarmMapGL({ viewport, setViewport, farms }) {
   const [selectedFarm, setSelectedFarm] = useState(null);
 
   const handleViewportChange = (viewport) => {
@@ -21,8 +19,8 @@ export default function FarmMapGL({ features, viewport, setViewport }) {
         mapboxApiAccessToken={process.env.MAPBOX_KEY}
         onViewportChange={handleViewportChange}
       >
-        {data.data.length
-          ? data.data.map((farm) => {
+        {farms.length
+          ? farms.map((farm) => {
               return (
                 <Marker
                   key={farm.name}

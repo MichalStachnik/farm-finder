@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function Suggestion({ features, suggestionClick }) {
   const [selected, setSelected] = useState(null);
@@ -22,10 +23,6 @@ export default function Suggestion({ features, suggestionClick }) {
         ))}
       </ul>
       <style jsx>{`
-        div {
-          width: 30%;
-        }
-
         ul {
           display: flex;
           flex-direction: column;

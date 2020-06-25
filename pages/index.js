@@ -1,6 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import ReactMapGL from 'react-map-gl';
+
+import useSWR from 'swr';
 
 import { getFeatures } from '../services/api.service';
 
@@ -8,24 +11,24 @@ const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
   ssr: false,
 });
 import Suggestions from '../components/Suggestions/Suggestions';
+import Navbar from '../components/Navbar/Navbar';
 
-const debounce = (fn, time) => {
-  let timeoutID;
-  return (arg) => {
-    if (timeoutID) {
-      clearTimeout(timeoutID);
-    }
-
-    timeoutID = setTimeout(() => {
-      fn(arg);
-    }, time);
-  };
-};
+const fetcher = (query) =>
+  fetch('/api/farms', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({ query }),
+  })
+    .then((res) => {
+      console.log('in then', res);
+      return res.json();
+    })
+    .then((json) => json.data);
 
 function HomePage() {
-  const [searchValue, setSearchValue] = useState('');
   const [features, setFeatures] = useState([]);
-  const [showingSuggestions, setShowingSuggestions] = useState(false);
   const [viewport, setViewport] = useState({
     latitude: 41,
     longitude: -74,
@@ -34,73 +37,49 @@ function HomePage() {
     zoom: 6,
   });
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (searchValue.length === 0) return;
+  const handleSearchChange = async (searchValue) => {
     const { attribution, features } = await getFeatures(searchValue);
     setFeatures(features);
   };
 
-  const search = async (searchValue) => {
-    const { attribution, features } = await getFeatures(searchValue);
-    setFeatures(features);
-  };
-
-  const makeDebouncedQuery = useCallback(
-    debounce((val) => search(val), 1500),
-    []
-  );
-
-  const handleInputChange = async (e) => {
-    setSearchValue(e.target.value);
-    makeDebouncedQuery(e.target.value);
-  };
-
-  const handleInputFocus = () => {
-    setShowingSuggestions(true);
-  };
-
-  const handleSuggestionClick = (featureId) => {
-    const [selected] = features.filter((feature) => feature.id === featureId);
-
+  const handleViewportChange = ({ latitude, longitude }) => {
     setViewport({
       ...viewport,
-      latitude: selected.center[1],
-      longitude: selected.center[0],
+      latitude,
+      longitude,
     });
-    setShowingSuggestions(false);
   };
+
+  const { data, error } = useSWR(
+    '{ farms { name, latitude, longitude, products } }',
+    fetcher
+  );
+
+  const farms = data?.farms || [];
+
+  if (error) return;
 
   return (
     <div>
-      <div className="top-container">
-        <div className="search-container">
-          <h1>Welcome to Farm Finder</h1>
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              value={searchValue}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-              placeholder="Search..."
-            />
-            <button>
-              <img src="/search-location-solid.svg" alt="search location" />
-            </button>
-          </form>
-        </div>
-        {showingSuggestions && searchValue.length && features.length ? (
-          <Suggestions
-            suggestionClick={handleSuggestionClick}
-            features={features}
-          />
-        ) : null}
-      </div>
-      <FarmMapGL
-        viewport={viewport}
-        setViewport={setViewport}
+      <Head>
+        <title>Farm Finder</title>
+        <meta
+          name="description"
+          content="Find local farms and help reduce food waste and spoilage due to supply chain break downs."
+        />
+      </Head>
+      <Navbar
+        changeViewport={handleViewportChange}
+        changeSearch={handleSearchChange}
         features={features}
-      ></FarmMapGL>
+      />
+      <main>
+        <FarmMapGL
+          viewport={viewport}
+          setViewport={setViewport}
+          farms={farms}
+        ></FarmMapGL>
+      </main>
     </div>
   );
 }
