@@ -12,8 +12,8 @@ export default (req, res) => {
       name: 'test ok',
       conn: connection_string,
       mb,
-      user,
-      pass,
+      userIs: user,
+      passIs: pass,
     })
   );
 };
