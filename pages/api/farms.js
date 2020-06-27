@@ -1,75 +1,43 @@
-import { ApolloServer, gql } from 'apollo-server-micro';
-import { makeExecutableSchema } from 'graphql-tools';
-import { MongoClient } from 'mongodb';
+const url = require('url');
+const MongoClient = require('mongodb').MongoClient;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-ii9ft.mongodb.net/farm-fresh?retryWrites=true&w=majority`;
 
-const connection_string = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-ii9ft.mongodb.net/farm-fresh?retryWrites=true&w=majority`;
+// Create cached connection variable
+let cachedDb = null;
 
-const typeDefs = gql`
-  type Farm {
-    id: ID!
-    name: String
-    latitude: String
-    longitude: String
-    products: [String]
+// A function for connecting to MongoDB,
+// taking a single parameter of the connection string
+async function connectToDatabase(uri) {
+  // If the database connection is cached,
+  // use it instead of creating a new connection
+  if (cachedDb) {
+    return cachedDb;
   }
 
-  type Product {
-    type: String
-  }
+  // If no connection is cached, create a new one
+  const client = await MongoClient.connect(uri, { useNewUrlParser: true });
 
-  type Query {
-    farms: [Farm]
-  }
-`;
+  // Select the database through the connection,
+  // using the database path of the connection string
+  const dbName = url.parse(uri).pathname.substr(1);
+  const db = await client.db(dbName);
 
-const resolvers = {
-  Query: {
-    farms: (_parent, _args, _ctx) => {
-      return _ctx.db
-        .collection('farms')
-        .findOne()
-        .then((data) => data.farms);
-    },
-  },
+  // Cache the database connection and return the connection
+  cachedDb = db;
+  return db;
+}
+
+// The main, exported, function of the endpoint,
+// dealing with the request and subsequent response
+module.exports = async (req, res) => {
+  // Get a database connection, cached or otherwise,
+  const db = await connectToDatabase(uri);
+
+  // Select the "farms" collection from the database
+  const collection = await db.collection('farms');
+
+  const farms = await collection.find({}).toArray();
+
+  // Respond with a JSON string of all users in the collection
+  res.status(200).json({ farms });
 };
-
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
-
-let db;
-
-const apolloServer = new ApolloServer({
-  schema,
-  context: async () => {
-    if (!db) {
-      try {
-        const dbClient = new MongoClient(connection_string, {
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
-        });
-
-        if (!dbClient.isConnected()) {
-          console.log('connecting...');
-          await dbClient.connect();
-        }
-        db = dbClient.db('farm-fresh');
-      } catch (err) {
-        console.log('error connecting to mongo', err);
-      }
-    }
-
-    return { db };
-  },
-});
-
-const handler = apolloServer.createHandler({ path: '/api/farms' });
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-export default handler;
