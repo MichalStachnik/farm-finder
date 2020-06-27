@@ -2,17 +2,19 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import ReactMapGL from 'react-map-gl';
+import fetch from 'isomorphic-unfetch';
 
 import useSWR from 'swr';
 
 import { getFeatures } from '../services/api.service';
+
+import { server } from '../utils/config';
 
 const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
   ssr: false,
 });
 import Suggestions from '../components/Suggestions/Suggestions';
 import Navbar from '../components/Navbar/Navbar';
-
 const fetcher = (query) =>
   fetch('/api/farms', {
     method: 'POST',
@@ -27,7 +29,7 @@ const fetcher = (query) =>
     })
     .then((json) => json.data);
 
-function HomePage() {
+function Index() {
   const [features, setFeatures] = useState([]);
   const [viewport, setViewport] = useState({
     latitude: 41,
@@ -57,10 +59,10 @@ function HomePage() {
   // );
 
   const fetchFarms = async () => {
-    const res = await fetch('/api/farms-rest');
+    const res = await fetch('/api/farms');
     console.log('the res', res);
     const data = await res.json();
-    console.log('the data', data);
+    console.log('data back', data);
     setFarms(data.farms[0].farms);
   };
 
@@ -93,4 +95,21 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+// Index.getInitialProps = async ({ req }) => {
+//   // const res = await fetch(`${server}/api/farms-rest`);
+
+//   let url;
+
+//   if (req.headers.host === 'localhost:3000') {
+//     url = 'http://localhost:3000/api/farms-rest';
+//   } else {
+//     url = `https://${req.headers.host}/api/farms-rest`;
+//   }
+
+//   const res = await fetch(url);
+//   const data = await res.json();
+
+//   return { farms: data.farms[0].farms };
+// };
+
+export default Index;
