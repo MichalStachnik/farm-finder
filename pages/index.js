@@ -78,6 +78,7 @@ function Index() {
           name="description"
           content="Find local farms and help reduce food waste and spoilage due to supply chain break downs."
         />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Navbar
         changeViewport={handleViewportChange}
