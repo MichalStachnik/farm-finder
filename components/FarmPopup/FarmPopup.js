@@ -13,7 +13,7 @@ export default function FarmPopup({ selectedFarm }) {
           {selectedFarm.products.map((product) => {
             return (
               <li key={product}>
-                <img src={`${product}.svg`} alt={product} />
+                <img title={product} src={`${product}.svg`} alt={product} />
               </li>
             );
           })}

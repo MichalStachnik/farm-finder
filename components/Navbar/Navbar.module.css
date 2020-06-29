@@ -29,9 +29,11 @@
   display: flex;
 }
 
-/* .form label {
-  display: none;
-} */
+.form label {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
 
 .input {
   flex: 1;

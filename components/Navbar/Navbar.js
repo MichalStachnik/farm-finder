@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import Link from 'next/link';
 import Suggestions from '../Suggestions/Suggestions';
 
 import { debounce } from '../../utils/debounce';
@@ -48,33 +49,43 @@ export default function Navbar({ changeViewport, changeSearch, features }) {
   return (
     <nav className={styles.nav}>
       <div>
-        <h1>Farm Finder</h1>
+        <h1>Farm Fresh</h1>
       </div>
       <div className={styles.searchContainer}>
-        <form className={styles.form} onSubmit={onSubmit}>
-          <label htmlFor="search-input">Search</label>
-          <input
-            className={styles.input}
-            id="search-input"
-            type="text"
-            placeholder="Search for local farms..."
-            value={searchValue}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-          />
-          <button className={styles.button}>
-            <img
-              className={styles.img}
-              src="/search-location-solid.svg"
-              alt="search location"
+        {changeViewport ? (
+          <form className={styles.form} onSubmit={onSubmit}>
+            <label htmlFor="search-input">Search</label>
+            <input
+              className={styles.input}
+              id="search-input"
+              type="text"
+              placeholder="Search for local farms..."
+              value={searchValue}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
             />
-          </button>
-        </form>
+            <button className={styles.button}>
+              <img
+                className={styles.img}
+                src="/search-location-solid.svg"
+                alt="search location"
+              />
+            </button>
+          </form>
+        ) : null}
       </div>
       <div className={styles.links}>
         <ul className={styles.ul}>
-          <li>Home</li>
-          <li>About</li>
+          <li>
+            <Link href="/">
+              <a>Home</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/about">
+              <a>About</a>
+            </Link>
+          </li>
         </ul>
       </div>
       <div className={styles.suggestionsContainer}>

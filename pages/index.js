@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import ReactMapGL from 'react-map-gl';
 import fetch from 'isomorphic-unfetch';
-
 import useSWR from 'swr';
 
 import { getFeatures } from '../services/api.service';
@@ -15,6 +14,7 @@ const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
 });
 import Suggestions from '../components/Suggestions/Suggestions';
 import Navbar from '../components/Navbar/Navbar';
+
 const fetcher = (query) =>
   fetch('/api/farms', {
     method: 'POST',
@@ -73,10 +73,10 @@ function Index() {
   return (
     <div>
       <Head>
-        <title>Farm Finder</title>
+        <title>Farm Fresh</title>
         <meta
           name="description"
-          content="Find local farms and help reduce food waste and spoilage due to supply chain break downs."
+          content="Find local farms and help reduce food waste and spoilage due to supply chain breakdowns."
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
