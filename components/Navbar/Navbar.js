@@ -6,7 +6,11 @@ import { debounce } from '../../utils/debounce';
 
 import styles from './Navbar.module.css';
 
-export default function Navbar({ changeViewport, changeSearch, features }) {
+export default function Navbar({
+  changeViewport = null,
+  changeSearch = null,
+  features = [],
+}) {
   const [searchValue, setSearchValue] = useState('');
   const [showingSuggestions, setShowingSuggestions] = useState(false);
 
