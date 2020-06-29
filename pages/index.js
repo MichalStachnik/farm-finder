@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import ReactMapGL from 'react-map-gl';
 import fetch from 'isomorphic-unfetch';
-import useSWR from 'swr';
+// import useSWR from 'swr';
+import { GlobalContext } from '../context/GlobalState';
 
 import { getFeatures } from '../services/api.service';
 
@@ -15,30 +16,18 @@ const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
 import Suggestions from '../components/Suggestions/Suggestions';
 import Navbar from '../components/Navbar/Navbar';
 
-const fetcher = (query) =>
-  fetch('/api/farms', {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify({ query }),
-  })
-    .then((res) => {
-      console.log('in then', res);
-      return res.json();
-    })
-    .then((json) => json.data);
-
 function Index() {
   const [features, setFeatures] = useState([]);
   const [viewport, setViewport] = useState({
-    latitude: 41,
-    longitude: -74,
+    latitude: 41.5,
+    longitude: -73.5,
     width: '100%',
     height: '100%',
-    zoom: 6,
+    zoom: 9,
   });
   const [farms, setFarms] = useState([]);
+
+  const myContext = useContext(GlobalContext);
 
   const handleSearchChange = async (searchValue) => {
     const { attribution, features } = await getFeatures(searchValue);
@@ -53,17 +42,16 @@ function Index() {
     });
   };
 
-  // const { data, error } = useSWR(
-  //   '{ farms { name, latitude, longitude, products } }',
-  //   fetcher
-  // );
-
   const fetchFarms = async () => {
     const res = await fetch('/api/farms');
     console.log('the res', res);
     const data = await res.json();
     console.log('data back', data);
+    // Set farms to local state
     setFarms(data.farms[0].farms);
+
+    // Set farms to global state
+    myContext.setFarms(data.farms[0].farms);
   };
 
   useEffect(() => {
@@ -98,14 +86,6 @@ function Index() {
 
 // Index.getInitialProps = async ({ req }) => {
 //   // const res = await fetch(`${server}/api/farms-rest`);
-
-//   let url;
-
-//   if (req.headers.host === 'localhost:3000') {
-//     url = 'http://localhost:3000/api/farms-rest';
-//   } else {
-//     url = `https://${req.headers.host}/api/farms-rest`;
-//   }
 
 //   const res = await fetch(url);
 //   const data = await res.json();

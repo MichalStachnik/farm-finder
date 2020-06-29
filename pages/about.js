@@ -24,8 +24,19 @@ function About() {
         features={features}
       />
       <main>
-        <div>about</div>
+        <div>
+          Farm Fresh aims to connect anyone looking for fresh, unspoiled food
+          with local farmers.
+        </div>
       </main>
+      <style jsx>{`
+        main {
+          position: absolute;
+          bottom: 0;
+          height: calc(100vh - 60px);
+          width: 100vw;
+        }
+      `}</style>
     </div>
   );
 }

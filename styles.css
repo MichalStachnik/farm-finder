@@ -6,6 +6,7 @@
   --forest-green: #0d8c44;
   --light-green: #63bf8b;
   --white: #f2f2f2;
+  --dark: #222;
 }
 
 * {
@@ -19,60 +20,14 @@ li {
   list-style-type: none;
 }
 
-.top-container {
-  position: absolute;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-  pointer-events: none;
+a {
+  text-decoration: unset;
+  color: var(--dark);
+  transition: 0.2s all ease-in-out;
 }
 
-.top-container .search-container {
-  margin-top: 2vh;
-  height: 15vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.top-container form {
-  display: flex;
-  pointer-events: auto;
-  margin-bottom: 1rem;
-}
-
-.top-container input {
-  flex: 1;
-  min-height: 60px;
-  border: 1px solid var(--light-blue);
-  border-right: none;
-  border-radius: 5px 0 0 5px;
-  padding: 1rem;
-  outline: none;
-  font-size: 18px;
-}
-
-.top-container button {
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  background: var(--white);
+a:hover {
   color: var(--light-green);
-  border: 1px solid var(--light-blue);
-  border-radius: 0 5px 5px 0;
-  padding: 1rem;
-  cursor: pointer;
-}
-
-.top-container button img {
-  width: 18px;
-}
-
-.top-container button:focus {
-  outline: none;
 }
 
 .mapboxgl-popup-content {
