@@ -6,10 +6,6 @@ import { GlobalContext } from '../../context/GlobalState';
 import Navbar from '../../components/Navbar/Navbar';
 
 function Farm({ farms }) {
-  const handleViewportChange = null;
-  const handleSearchChange = null;
-  const features = [];
-
   const router = useRouter();
 
   const { farmId } = router.query;
@@ -28,11 +24,7 @@ function Farm({ farms }) {
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Navbar
-        changeViewport={handleViewportChange}
-        changeSearch={handleSearchChange}
-        features={features}
-      />
+      <Navbar />
       <main>
         <div>{selectedFarm.name}</div>
         <div>{selectedFarm.name}</div>
