@@ -31,7 +31,7 @@ export default function Suggestion({ features, suggestionClick }) {
 
         li {
           font-size: 0.9rem;
-          min-height: 60px;
+          min-height: 50px;
           margin-bottom: 1rem;
           display: flex;
           align-items: center;

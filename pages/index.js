@@ -2,8 +2,6 @@ import { useState, useEffect, useContext } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import ReactMapGL from 'react-map-gl';
-import fetch from 'isomorphic-unfetch';
-// import useSWR from 'swr';
 import { GlobalContext } from '../context/GlobalState';
 
 import { getFeatures } from '../services/api.service';
@@ -83,14 +81,5 @@ function Index() {
     </div>
   );
 }
-
-// Index.getInitialProps = async ({ req }) => {
-//   // const res = await fetch(`${server}/api/farms-rest`);
-
-//   const res = await fetch(url);
-//   const data = await res.json();
-
-//   return { farms: data.farms[0].farms };
-// };
 
 export default Index;

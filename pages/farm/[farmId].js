@@ -87,6 +87,8 @@ function Farm({ farms }) {
   );
 }
 
+// This function gets called at build time on server-side. It won't be called on client-side
+
 // export async function getStaticProps({ req }) {
 //   let url;
 
@@ -108,6 +110,7 @@ function Farm({ farms }) {
 //   };
 // }
 
+// This gets called on every request
 export async function getServerSideProps({ req }) {
   let url;
 
