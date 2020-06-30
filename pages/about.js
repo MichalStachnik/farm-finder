@@ -19,8 +19,8 @@ function About() {
       <main>
         <div>
           Farm Fresh aims to connect anyone looking for fresh, unspoiled food
-          with local farmers to help combat the breakdowns in the our supply
-          chains that lead to food waste.
+          with local farmers to help combat the breakdowns in our supply chains
+          that lead to food waste.
         </div>
       </main>
       <style jsx>{`

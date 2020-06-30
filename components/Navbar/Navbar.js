@@ -52,8 +52,11 @@ export default function Navbar({
 
   return (
     <nav className={styles.nav}>
-      <div>
-        <h1>Farm Fresh</h1>
+      <div className={styles.logo}>
+        <Link href="/">
+          <h1>Farm Fresh</h1>
+        </Link>
+        <p>help end local food waste</p>
       </div>
       <div className={styles.searchContainer}>
         {changeViewport ? (
