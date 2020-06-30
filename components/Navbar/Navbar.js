@@ -10,6 +10,7 @@ export default function Navbar({
   changeViewport = null,
   changeSearch = null,
   features = [],
+  inverted = false,
 }) {
   const [searchValue, setSearchValue] = useState('');
   const [showingSuggestions, setShowingSuggestions] = useState(false);
@@ -50,8 +51,12 @@ export default function Navbar({
     setShowingSuggestions(false);
   };
 
+  let navClass = inverted
+    ? `${styles.nav} ${styles.inverted}`
+    : `${styles.nav}`;
+
   return (
-    <nav className={styles.nav}>
+    <nav className={`${navClass}`}>
       <div className={styles.logo}>
         <Link href="/">
           <h1>Farm Fresh</h1>

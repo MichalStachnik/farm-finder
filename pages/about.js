@@ -15,7 +15,7 @@ function About() {
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Navbar />
+      <Navbar inverted={true} />
       <main>
         <div>
           Farm Fresh aims to connect anyone looking for fresh, unspoiled food
