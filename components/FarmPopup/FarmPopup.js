@@ -1,13 +1,17 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function FarmPopup({ selectedFarm }) {
   return (
     <div className="container">
       <h5>
-        <a href={selectedFarm.website} target="_blank">
+        <Link href="/farm/[farmId]" as={`/farm/${selectedFarm.id}`}>
           {selectedFarm.name}
-        </a>
+        </Link>
       </h5>
+      <a href={selectedFarm.website} target="_blank">
+        {selectedFarm.website}
+      </a>
       <div>
         <ul>
           {selectedFarm.products.map((product) => {
@@ -34,12 +38,14 @@ export default function FarmPopup({ selectedFarm }) {
 
         a {
           color: var(--light-green);
+          font-size: 12px;
         }
 
         ul {
           display: grid;
           grid-template-columns: 1fr 1fr;
           place-items: center;
+          margin-top: 20px;
         }
 
         img {
