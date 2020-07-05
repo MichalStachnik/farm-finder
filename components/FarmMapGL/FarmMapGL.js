@@ -45,8 +45,9 @@ export default function FarmMapGL({ viewport, setViewport, farms }) {
             onClose={() => setSelectedFarm(null)}
             closeOnClick={false}
             anchor="left"
-            offsetLeft={20}
+            offsetLeft={40}
             offsetTop={5}
+            tipSize={0}
           >
             <FarmPopup selectedFarm={selectedFarm} />
           </Popup>
