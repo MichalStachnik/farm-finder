@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import Navbar from '../components/Navbar/Navbar';
