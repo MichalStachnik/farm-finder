@@ -5,7 +5,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 // The main, exported, function of the endpoint,
 // dealing with the request and subsequent response
 module.exports = async (req, res) => {
-  // Get a database connection, cached or otherwise,
+  // Get a database connection, cached or otherwise
   const db = await connectToDb(uri);
 
   // Select the "farms" collection from the database
@@ -13,6 +13,6 @@ module.exports = async (req, res) => {
 
   const farms = await collection.find({}).toArray();
 
-  // Respond with a JSON string of all users in the collection
+  // Respond with a JSON string of all farms in the collection
   res.status(200).json({ farms });
 };

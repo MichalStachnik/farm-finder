@@ -93,4 +93,5 @@
 .ul {
   display: flex;
   justify-content: space-evenly;
+  font-size: 14px;
 }
