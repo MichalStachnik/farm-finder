@@ -17,6 +17,7 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "graphql-tools": "^6.0.10",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.9",
     "next": "^9.4.4",
     "next-absolute-url": "^1.2.2",

@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 import { connectToDb } from '../../../services/connectToDb.service';
 
@@ -26,10 +27,25 @@ module.exports = async (req, res) => {
       // Test the password
       const isMatched = await bcrypt.compare(password, user.password);
 
-      console.log('isMatched', isMatched);
       // If true, send token to fe that we are logged in
+      if (isMatched) {
+        const payload = user;
 
-      res.status(200).json({ msg: 'success logged in', user });
+        // Set JWT
+        jwt.sign(
+          payload,
+          'mysecret',
+          {
+            expiresIn: '30d',
+          },
+          (err, token) => {
+            if (err) throw err;
+            res.status(200).json({ msg: 'token signed', token });
+          }
+        );
+      } else {
+        res.status(400).json({ msg: 'auth error' });
+      }
     } else {
       res.status(400).json({ msg: 'error no email' });
     }

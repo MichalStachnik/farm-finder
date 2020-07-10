@@ -1,32 +1,40 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
 
+import { GlobalContext } from '../context/GlobalState';
 import Navbar from '../components/Navbar/Navbar';
 
-function Register() {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
+
+  const myContext = useContext(GlobalContext);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (email.length === 0 || password.length === 0 || password2.length === 0)
-      return;
+    if (email.length === 0 || password.length === 0) return;
 
     const user = {
       email,
       password,
     };
 
-    const res = await fetch('/api/auth/register', {
+    const res = await fetch('/api/auth/login', {
       method: 'POST',
       body: JSON.stringify(user),
     });
+    console.log('the res after logging in', res);
+    const data = await res.json();
+    console.log('and the data', data);
 
-    console.log('the res', res);
-    // Send to login screen
-    Router.push('/login');
+    if (!data.token) return;
+
+    // Set token to global state
+    myContext.setToken(data.token);
+
+    // Send to home screen
+    Router.push('/');
   };
 
   return (
@@ -41,6 +49,7 @@ function Register() {
       </Head>
       <Navbar />
       <main>
+        login
         <form onSubmit={onSubmit}>
           <h1>Register</h1>
           <div>
@@ -56,14 +65,6 @@ function Register() {
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              type="password"
-            />
-          </div>
-          <div>
-            <label>Confirm password</label>
-            <input
-              value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
               type="password"
             />
           </div>
@@ -85,4 +86,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;

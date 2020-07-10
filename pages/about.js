@@ -1,8 +1,13 @@
 import Head from 'next/head';
+import { useContext } from 'react';
 
 import Navbar from '../components/Navbar/Navbar';
+import { GlobalContext } from '../context/GlobalState';
 
 function About() {
+  const myContext = useContext(GlobalContext);
+  console.log('our token', myContext.userToken);
+
   return (
     <div>
       <Head>

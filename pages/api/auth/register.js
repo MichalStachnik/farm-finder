@@ -37,12 +37,13 @@ module.exports = async (req, res) => {
 
     // Create new user with salted password
     const inserted = await collection.insertOne({
-      email
-      password: saltedPassword
+      email,
+      password: saltedPassword,
     });
 
-    console.log('inserted', inserted);
-    res.status(200).json({ msg: 'success inserted', inserted });
+    if (inserted) {
+      res.status(200).json({ msg: 'success inserted' });
+    }
   } catch (error) {
     console.error('error', error);
     res.status(400).json({ msg: 'error' });

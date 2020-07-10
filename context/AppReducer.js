@@ -5,5 +5,10 @@ export default (state, action) => {
         ...state,
         farms: [action.payload],
       };
+    case 'SET_TOKEN':
+      return {
+        ...state,
+        userToken: action.payload,
+      };
   }
 };

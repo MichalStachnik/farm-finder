@@ -3,6 +3,7 @@ import AppReducer from './AppReducer';
 
 const initialState = {
   farms: [],
+  userToken: null,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -17,11 +18,20 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function setToken(token) {
+    dispatch({
+      type: 'SET_TOKEN',
+      payload: token,
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
         farms: state.farms,
         setFarms,
+        userToken: state.userToken,
+        setToken,
       }}
     >
       {children}
