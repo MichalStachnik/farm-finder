@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
+
 import Suggestions from '../Suggestions/Suggestions';
+import Search from '../Search/Search';
 
 import { debounce } from '../../utils/debounce';
 
@@ -12,32 +14,11 @@ export default function Navbar({
   features = [],
   inverted = false,
 }) {
-  const [searchValue, setSearchValue] = useState('');
   const [showingSuggestions, setShowingSuggestions] = useState(false);
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (searchValue.length === 0) return;
-    changeSearch(searchValue);
-  };
-
-  const handleInputChange = async (e) => {
-    setSearchValue(e.target.value);
-    makeDebouncedQuery(e.target.value);
-  };
 
   const handleInputFocus = () => {
     setShowingSuggestions(true);
   };
-
-  const search = (searchValue) => {
-    changeSearch(searchValue);
-  };
-
-  const makeDebouncedQuery = useCallback(
-    debounce((val) => search(val), 1500),
-    []
-  );
 
   const handleSuggestionClick = (featureId) => {
     const [selected] = features.filter((feature) => feature.id === featureId);
@@ -63,29 +44,9 @@ export default function Navbar({
         </Link>
         <p>help end local food waste</p>
       </div>
-      <div className={styles.searchContainer}>
-        {changeViewport ? (
-          <form className={styles.form} onSubmit={onSubmit}>
-            <label htmlFor="search-input">Search</label>
-            <input
-              className={styles.input}
-              id="search-input"
-              type="text"
-              placeholder="Search for local farms..."
-              value={searchValue}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-            />
-            <button className={styles.button}>
-              <img
-                className={styles.img}
-                src="/search-location-solid.svg"
-                alt="search location"
-              />
-            </button>
-          </form>
-        ) : null}
-      </div>
+      {/* <div className={styles.searchContainer}>
+        {changeViewport ? <Search changeSearch={changeSearch} /> : null}
+      </div> */}
       <div className={styles.links}>
         <ul className={styles.ul}>
           <li>
@@ -106,7 +67,7 @@ export default function Navbar({
         </ul>
       </div>
       <div className={styles.suggestionsContainer}>
-        {showingSuggestions && searchValue.length && features.length ? (
+        {features.length ? (
           <Suggestions
             suggestionClick={handleSuggestionClick}
             features={features}

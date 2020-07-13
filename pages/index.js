@@ -11,6 +11,10 @@ import { server } from '../utils/config';
 const FarmMapGL = dynamic(() => import('../components/FarmMapGL/FarmMapGL'), {
   ssr: false,
 });
+const Search = dynamic(() => import('../components/Search/Search'), {
+  ssr: false,
+});
+
 import Suggestions from '../components/Suggestions/Suggestions';
 import Navbar from '../components/Navbar/Navbar';
 
@@ -28,7 +32,9 @@ function Index() {
   const myContext = useContext(GlobalContext);
 
   const handleSearchChange = async (searchValue) => {
+    console.log('handleSearchChange', searchValue);
     const { attribution, features } = await getFeatures(searchValue);
+    console.log('feat', features);
     setFeatures(features);
   };
 
@@ -72,6 +78,7 @@ function Index() {
         features={features}
       />
       <main>
+        <Search changeSearch={handleSearchChange} />
         <FarmMapGL
           viewport={viewport}
           setViewport={setViewport}
