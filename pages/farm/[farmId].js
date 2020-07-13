@@ -26,10 +26,18 @@ function Farm({ farms }) {
       </Head>
       <Navbar />
       <main>
-        <div>{selectedFarm.name}</div>
-        <div>{selectedFarm.name}</div>
-        <div>{selectedFarm.name}</div>
-        <div>{selectedFarm.name}</div>
+        <div className="grid-area">
+          <div className="card">{selectedFarm.name}</div>
+        </div>
+        <div className="grid-area">
+          <div className="card">{selectedFarm.name}</div>
+        </div>
+        <div className="grid-area">
+          <div className="card">{selectedFarm.name}</div>
+        </div>
+        <div className="grid-area">
+          <div className="card">{selectedFarm.name}</div>
+        </div>
       </main>
       <style jsx>{`
         main {
@@ -38,39 +46,58 @@ function Farm({ farms }) {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr 1fr;
           grid-template-rows: 1fr 1fr 1fr 1fr;
+          grid-gap: 10px;
           height: calc(100vh - 60px);
           width: 100vw;
           place-items: center;
         }
 
-        main div {
+        main div.grid-area {
           width: 100%;
           height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
+          background: url('/farm-bg.jpg');
+          // background: linear-gradient(#e66465, #9198e5);
+          background-size: cover;
+          background-attachment: fixed;
+          background-position: center;
+        }
+
+        div.card {
+          width: 70%;
+          height: 70%;
+          border-radius: 3px;
+          box-shadow: 0 3px 20px 0 #333;
+          background: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(0, 0, 0, 0.125);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
         }
 
         main div:nth-of-type(1) {
-          background: darksalmon;
+          // background: darksalmon;
           grid-column: 1/3;
           grid-row: 1/4;
         }
 
         main div:nth-of-type(2) {
-          background: darkseagreen;
+          // background: darkseagreen;
           grid-column: 3/5;
           grid-row: 1/2;
         }
 
         main div:nth-of-type(3) {
-          background: lightblue;
+          // background: lightblue;
           grid-column: 1/3;
           grid-row: 4/5;
         }
 
         main div:nth-of-type(4) {
-          background: lightgoldenrodyellow;
+          // background: lightgoldenrodyellow;
           grid-column: 3/5;
           grid-row: 2/5;
         }

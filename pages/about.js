@@ -21,9 +21,9 @@ function About() {
       <Navbar inverted={true} />
       <main>
         <div>
-          Farm Fresh aims to connect anyone looking for fresh, unspoiled food
-          with local farmers to help combat the breakdowns in our supply chains
-          that lead to food waste.
+          Farm Fresh is a tool for anyone looking for fresh, unspoiled food and
+          local farmers to help combat the breakdowns in our supply chains that
+          can lead to food waste.
         </div>
       </main>
       <style jsx>{`
