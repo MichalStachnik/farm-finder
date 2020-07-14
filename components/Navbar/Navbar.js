@@ -2,9 +2,6 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 
 import Suggestions from '../Suggestions/Suggestions';
-import Search from '../Search/Search';
-
-import { debounce } from '../../utils/debounce';
 
 import styles from './Navbar.module.css';
 
