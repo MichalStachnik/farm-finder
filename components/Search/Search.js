@@ -44,6 +44,7 @@ export default function Search({ changeSearch }) {
             onChange={handleInputChange}
             onFocus={handleInputFocus}
           />
+          {/* <span> */}
           <button className="search">
             <img
               className="img"
@@ -51,10 +52,13 @@ export default function Search({ changeSearch }) {
               alt="search location"
             />
           </button>
-          <span onClick={() => setIsOpen(false)}>X</span>
+          {/* </span> */}
+          <span className="close-container" onClick={() => setIsOpen(false)}>
+            <button className="close">X</button>
+          </span>
         </>
       ) : (
-        <span onClick={() => setIsOpen(true)}>
+        <span className="open-container" onClick={() => setIsOpen(true)}>
           <button className="search">
             <img
               className="img"
@@ -66,11 +70,13 @@ export default function Search({ changeSearch }) {
       )}
       <style jsx>{`
         form {
+          width: 30vw;
           position: absolute;
-          right: 10%;
-          top: 10%;
+          right: 4.5vw;
+          top: 70px;
           z-index: 1;
           display: flex;
+          justify-content: flex-end;
         }
 
         form label {
@@ -90,19 +96,44 @@ export default function Search({ changeSearch }) {
           border-color: #222;
         }
 
+        .open-container {
+          width: 48px;
+        }
+
+        .open-container button.search {
+          border-radius: 5px;
+        }
+
         button.search {
+          width: 100%;
           flex: 0.25;
           min-height: 30px;
           display: flex;
           align-items: center;
           background: #373737;
           border: none;
-          border-radius: 0 5px 5px 0;
+          border-right: 2px solid var(--white);
           padding: 0.5rem;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
+        }
+
+        span.close-container {
+          flex: 0.25;
+        }
+
+        button.close {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          background: #373737;
+          border: none;
+          border-radius: 0 5px 5px 0;
+          color: var(--white);
         }
 
         button.toggle {

@@ -63,14 +63,14 @@ export default function Navbar({
           </li>
         </ul>
       </div>
-      <div className={styles.suggestionsContainer}>
+      {/* <div className={styles.suggestionsContainer}>
         {features.length ? (
           <Suggestions
             suggestionClick={handleSuggestionClick}
             features={features}
           />
         ) : null}
-      </div>
+      </div> */}
     </nav>
   );
 }

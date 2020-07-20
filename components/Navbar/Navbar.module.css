@@ -1,13 +1,11 @@
 .nav {
   position: absolute;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 60px;
-  grid-template-areas:
-    'logo search links'
-    '. suggestions .';
-  place-items: center;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   color: var(--dark);
   z-index: 1;
   pointer-events: none;
@@ -86,8 +84,9 @@
   width: 18px;
 }
 
+.logo,
 .links {
-  width: 100%;
+  width: 30%;
 }
 
 .ul {
