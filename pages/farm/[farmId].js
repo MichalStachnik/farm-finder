@@ -79,25 +79,21 @@ function Farm({ farms }) {
         }
 
         main div:nth-of-type(1) {
-          // background: darksalmon;
           grid-column: 1/3;
           grid-row: 1/4;
         }
 
         main div:nth-of-type(2) {
-          // background: darkseagreen;
           grid-column: 3/5;
           grid-row: 1/2;
         }
 
         main div:nth-of-type(3) {
-          // background: lightblue;
           grid-column: 1/3;
           grid-row: 4/5;
         }
 
         main div:nth-of-type(4) {
-          // background: lightgoldenrodyellow;
           grid-column: 3/5;
           grid-row: 2/5;
         }

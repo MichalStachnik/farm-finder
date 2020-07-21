@@ -25,13 +25,21 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function setUserId(userId) {
+    dispatch({
+      type: 'SET_USER_ID',
+      payload: userId,
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
         farms: state.farms,
         setFarms,
-        userToken: state.userToken,
         setToken,
+        userToken: state.userToken,
+        setUserId,
       }}
     >
       {children}

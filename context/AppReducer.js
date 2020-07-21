@@ -10,5 +10,10 @@ export default (state, action) => {
         ...state,
         userToken: action.payload,
       };
+    case 'SET_USER_ID':
+      return {
+        ...state,
+        userId: action.payload,
+      };
   }
 };

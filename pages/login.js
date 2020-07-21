@@ -2,8 +2,9 @@ import { useState, useContext } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
 
-import { GlobalContext } from '../context/GlobalState';
 import Navbar from '../components/Navbar/Navbar';
+
+import { GlobalContext } from '../context/GlobalState';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -32,6 +33,7 @@ function Login() {
 
     // Set token to global state
     myContext.setToken(data.token);
+    myContext.setUserId(data.userId);
 
     // Send to home screen
     Router.push('/');
@@ -51,7 +53,7 @@ function Login() {
       <main>
         login
         <form onSubmit={onSubmit}>
-          <h1>Register</h1>
+          <h1>Login</h1>
           <div>
             <label>Email</label>
             <input
