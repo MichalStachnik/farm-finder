@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
   // Check user input
   const body = JSON.parse(req.body);
 
-  const { email, password, selectedFarm = null } = body;
+  const { email, password, userType, selectedFarm = null } = body;
 
   console.log('the selected farm I got', selectedFarm);
 
@@ -39,10 +39,11 @@ module.exports = async (req, res) => {
     console.log('saltedPassword', saltedPassword);
 
     // Create new user with salted password
-    // const inserted = await collection.insertOne({
-    //   email,
-    //   password: saltedPassword,
-    // });
+    const inserted = await collection.insertOne({
+      email,
+      password: saltedPassword,
+      userType,
+    });
 
     // Add selectedFarm to farms db
     if (selectedFarm) {
@@ -55,21 +56,19 @@ module.exports = async (req, res) => {
 
       const updatedFarmsArray = realFarmsArray.map((farm) => {
         if (selectedFarm === farm.id) {
-          farm.selectedFarm = email;
+          farm.claimedUser = email;
         }
         return farm;
       });
 
-      // Save updated collection
+      // Save updated farms collection
       const updated = await farmsCollection.update(
         {},
         { farms: updatedFarmsArray },
         { returnOriginal: false }
       );
 
-      console.log('updated', updated);
-
-      res.status(200).json({ msg: 'farms array', updated });
+      res.status(200).json({ msg: 'Register success' });
     }
 
     // if (inserted) {

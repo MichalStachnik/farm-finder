@@ -22,6 +22,7 @@ function Register({ farms }) {
       email,
       password,
       selectedFarm,
+      userType,
     };
 
     console.log('registering...', user);
