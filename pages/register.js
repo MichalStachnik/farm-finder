@@ -1,4 +1,5 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+
 import Head from 'next/head';
 import Router from 'next/router';
 
@@ -47,11 +48,13 @@ function Register({ farms }) {
   };
 
   const farmsJsx = farms.map((farm) => {
-    return (
-      <option key={farm.id} value={farm.id}>
-        {farm.name}
-      </option>
-    );
+    if (!farm.claimedUser && !farm.realUser) {
+      return (
+        <option key={farm.id} value={farm.id}>
+          {farm.name}
+        </option>
+      );
+    }
   });
 
   farmsJsx.unshift(

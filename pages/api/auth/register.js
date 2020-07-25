@@ -22,7 +22,6 @@ module.exports = async (req, res) => {
     const collection = await db.collection('users');
 
     const users = await collection.find({}).toArray();
-    // console.log('the users we found...', users);
 
     // TODO: fix this check
     // If email already exists return

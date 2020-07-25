@@ -31,9 +31,16 @@ function Login() {
 
     if (!data.token) return;
 
-    // Set token to global state
+    // Set data to global state
     myContext.setToken(data.token);
     myContext.setUserId(data.userId);
+    myContext.setUserType(data.userType);
+    myContext.setUserEmail(data.userEmail);
+
+    if (data.userType === 'admin') {
+      Router.push('/admin');
+      return;
+    }
 
     // Send to home screen
     Router.push('/');
@@ -70,7 +77,7 @@ function Login() {
               type="password"
             />
           </div>
-          <button type="submit">Register</button>
+          <button type="submit">Login</button>
         </form>
       </main>
       <style jsx>{`

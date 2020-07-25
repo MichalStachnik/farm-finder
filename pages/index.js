@@ -1,7 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
+
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+
 import ReactMapGL from 'react-map-gl';
+
 import { GlobalContext } from '../context/GlobalState';
 
 import { getFeatures } from '../services/api.service';
@@ -31,10 +34,10 @@ function Index() {
 
   const myContext = useContext(GlobalContext);
 
+  const userType = myContext.userType;
+
   const handleSearchChange = async (searchValue) => {
-    console.log('handleSearchChange', searchValue);
     const { attribution, features } = await getFeatures(searchValue);
-    console.log('feat', features);
     setFeatures(features);
   };
 
@@ -76,6 +79,7 @@ function Index() {
         changeViewport={handleViewportChange}
         changeSearch={handleSearchChange}
         features={features}
+        userType={userType}
       />
       <main>
         <Search changeSearch={handleSearchChange} />

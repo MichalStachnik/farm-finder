@@ -1,18 +1,22 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
+
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { GlobalContext } from '../../context/GlobalState';
-import Navbar from '../../components/Navbar/Navbar';
+import { GlobalContext } from '../../../context/GlobalState';
+
+import Navbar from '../../../components/Navbar/Navbar';
 
 function Farm({ farms }) {
   const router = useRouter();
+  const myContext = useContext(GlobalContext);
 
   const { farmId } = router.query;
 
-  // const { farms, setFarms } = useContext(GlobalContext);
+  const [selectedFarm] = farms.filter((farm) => farm.name === farmId);
 
-  const [selectedFarm] = farms.filter((farm) => farm.id === farmId);
+  const isRealUser = selectedFarm.realUser === myContext.userEmail;
 
   return (
     <div>
@@ -26,6 +30,14 @@ function Farm({ farms }) {
       </Head>
       <Navbar />
       <main>
+        {isRealUser ? (
+          <Link
+            href="/farm/[farmId]/editFarm"
+            as={`/farm/${selectedFarm.name}/editFarm`}
+          >
+            <a className="edit-farm">Edit Your Farm</a>
+          </Link>
+        ) : null}
         <div className="grid-area">
           <div className="card">{selectedFarm.name}</div>
         </div>
@@ -80,7 +92,7 @@ function Farm({ farms }) {
 
         main div:nth-of-type(1) {
           grid-column: 1/3;
-          grid-row: 1/4;
+          grid-row: 1/3;
         }
 
         main div:nth-of-type(2) {
@@ -90,12 +102,41 @@ function Farm({ farms }) {
 
         main div:nth-of-type(3) {
           grid-column: 1/3;
-          grid-row: 4/5;
+          grid-row: 3/5;
         }
 
         main div:nth-of-type(4) {
           grid-column: 3/5;
           grid-row: 2/5;
+        }
+
+        .edit-farm {
+          grid-column: 1/3;
+          grid-row: 1/2;
+          place-self: start center;
+          z-index: 1;
+          margin-top: 2rem;
+          background: var(--light-green);
+          color: var(--dark);
+          border-color: var(--light-green);
+          border-color: var(--white);
+          border-radius: 5px;
+          border-style: solid;
+          width: 40%;
+          height: 40px;
+          outline: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: 0.2s all ease-in-out;
+          color: var(--white);
+        }
+
+        .edit-farm:hover {
+          background: var(--white);
+          color: var(--light-green);
+          border: var(--light-green);
         }
       `}</style>
     </div>

@@ -40,9 +40,13 @@ module.exports = async (req, res) => {
           },
           (err, token) => {
             if (err) throw err;
-            res
-              .status(200)
-              .json({ msg: 'token signed', token, userId: user._id });
+            res.status(200).json({
+              msg: 'token signed',
+              token,
+              userId: user._id,
+              userType: user.userType,
+              userEmail: user.email,
+            });
           }
         );
       } else {

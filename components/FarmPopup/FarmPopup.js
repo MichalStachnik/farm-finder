@@ -16,17 +16,23 @@ export default function FarmPopup({ selectedFarm }) {
         <p>Offerings:</p>
         <ul>
           {selectedFarm.products.map((product) => {
-            return (
-              <li key={product}>
-                <img title={product} src={`${product}.svg`} alt={product} />
-                <p>{product}</p>
-              </li>
-            );
+            if (product.inStock) {
+              return (
+                <li key={product.name}>
+                  <img
+                    title={product.name}
+                    src={`${product.name}.svg`}
+                    alt={product.name}
+                  />
+                  <p>{product.name}</p>
+                </li>
+              );
+            }
           })}
         </ul>
       </div>
       <div className="button-container">
-        <Link href="/farm/[farmId]" as={`/farm/${selectedFarm.id}`}>
+        <Link href="/farm/[farmId]/farm" as={`/farm/${selectedFarm.name}/farm`}>
           <button>More Info</button>
         </Link>
       </div>

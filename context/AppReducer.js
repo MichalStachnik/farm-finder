@@ -15,5 +15,15 @@ export default (state, action) => {
         ...state,
         userId: action.payload,
       };
+    case 'SET_USER_TYPE':
+      return {
+        ...state,
+        userType: action.payload,
+      };
+    case 'SET_USER_EMAIL':
+      return {
+        ...state,
+        userEmail: action.payload,
+      };
   }
 };

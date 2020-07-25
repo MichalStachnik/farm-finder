@@ -72,7 +72,7 @@ export default function Search({ changeSearch }) {
         form {
           width: 30vw;
           position: absolute;
-          right: 4.5vw;
+          right: 3vw;
           top: 70px;
           z-index: 1;
           display: flex;
